@@ -78,6 +78,7 @@ export default {};
   &.mail-adress {
     background-color: #d9b2ca;
     padding: 10px 30px 10px 30px;
+    font-weight: bold;
   }
   &.line {
     background-color: #2bc331;
