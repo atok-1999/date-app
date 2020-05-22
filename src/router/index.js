@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import LoginAndRegistration from "../views/LoginAndRegistration.vue";
 import RegistrateWithEmail from "@/components/LoginAndRegistration/RegistrateWithEmail.vue";
+import LoginWithEmail from "@/components/LoginAndRegistration/LoginWithEmail.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/registrate-with-email",
     name: "RegistrateWithEmail",
     component: RegistrateWithEmail,
+  },
+  {
+    path: "/login-with-email",
+    name: "LoginWithEmail",
+    component: LoginWithEmail,
   },
 ];
 

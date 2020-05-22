@@ -1,14 +1,15 @@
 <template>
   <div class="content">
     <div class="privacy-policy">
-      <a href="#">利用規約</a>と
-      <a href="#">プライバシーポリシー</a>に同意の上
+      <a href="#">利用規約</a>と <a href="#">プライバシーポリシー</a>に同意の上
       <br />会員登録 / ログインして下さい
     </div>
     <div class="box">
       <div class="box-title">メールアドレスでログイン</div>
       <div class="inner-box-container">
-        <div class="inner-box mail-adress">ログインする</div>
+        <div class="button mail-adress login">
+          <router-link to="/login-with-email">ログインする</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -58,17 +59,25 @@ export default {};
   justify-content: space-evenly;
 }
 
-.inner-box {
+.button {
   cursor: pointer;
   border-radius: 5px;
   font-size: 13px;
-  color: #fff;
-  padding: 10px 20px 10px 20px;
+  font-weight: bold;
+  margin: 0 auto;
 
   &.mail-adress {
     background-color: #d9b2ca;
-    padding: 10px 30px 10px 30px;
-    font-weight: bold;
+    padding: 10px 40px 10px 40px;
+  }
+
+  &.login {
+    padding: 10px 40px 10px 40px;
+
+    & a {
+      text-decoration: none;
+      color: #fff;
+    }
   }
 }
 
