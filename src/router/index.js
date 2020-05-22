@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import LoginAndRegistration from "../views/LoginAndRegistration.vue";
-import RegistrateWithEmail from "@/components/LoginAndRegistration/RegistrateWithEmail.vue";
-import LoginWithEmail from "@/components/LoginAndRegistration/LoginWithEmail.vue";
+import Home from "@/views/Home.vue";
+import LoginOrSignup from "@/views/LoginOrSignup.vue";
+import SignupWithEmail from "@/views/SignupWithEmail.vue";
+import LoginWithEmail from "@/views/LoginWithEmail.vue";
 
 Vue.use(VueRouter);
 
@@ -23,14 +23,14 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/login-registration",
-    name: "LoginAndRegistration",
-    component: LoginAndRegistration,
+    path: "/login-or-signup",
+    name: "LoginOrSignup",
+    component: LoginOrSignup,
   },
   {
-    path: "/registrate-with-email",
-    name: "RegistrateWithEmail",
-    component: RegistrateWithEmail,
+    path: "/signup-with-email",
+    name: "SignupWithEmail",
+    component: SignupWithEmail,
   },
   {
     path: "/login-with-email",

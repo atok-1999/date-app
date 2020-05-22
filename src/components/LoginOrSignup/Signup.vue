@@ -1,8 +1,7 @@
 <template>
   <div class="content">
     <div class="privacy-policy">
-      <a href="#">利用規約</a>と
-      <a href="#">プライバシーポリシー</a>に同意の上
+      <a href="#">利用規約</a>と <a href="#">プライバシーポリシー</a>に同意の上
       <br />会員登録 / ログインして下さい
     </div>
     <div class="box">
@@ -16,7 +15,7 @@
     <div class="box">
       <div class="box-title">メールアドレスで登録</div>
       <div class="inner-box-container">
-        <router-link to="/registrate-with-email">
+        <router-link to="/signup-with-email">
           <div class="inner-box mail-adress">登録する</div>
         </router-link>
       </div>

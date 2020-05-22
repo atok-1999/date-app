@@ -21,19 +21,19 @@
         pageState === 'registration' ? 'underline-left' : 'underline-right'
       "
     ></div>
-    <Registration v-if="pageState === 'registration'"></Registration>
+    <Signup v-if="pageState === 'registration'"></Signup>
     <Login v-if="pageState === 'login'"></Login>
   </div>
 </template>
 
 <script>
-import Login from "@/components/LoginAndRegistration/Login.vue";
-import Registration from "@/components/LoginAndRegistration/Registration.vue";
+import Login from "@/components/LoginOrSignup/Login.vue";
+import Signup from "@/components/LoginOrSignup/Signup.vue";
 
 export default {
   components: {
     Login,
-    Registration,
+    Signup,
   },
   data() {
     return {

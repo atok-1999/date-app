@@ -34,7 +34,7 @@
             </div>
           </v-row>
           <v-row class="button signup">
-            <router-link to="/registrate-with-email">
+            <router-link to="/signup-with-email">
               新規会員登録する
             </router-link>
           </v-row>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import firebase from "@/main.js";
+
 export default {
   data() {
     return {
@@ -54,7 +56,13 @@ export default {
   },
   methods: {
     login() {
-      console.log("logged in!");
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.mailAddress, this.password)
+        .then(console.log("Success!"))
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
   },
 };

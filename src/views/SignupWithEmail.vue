@@ -50,7 +50,7 @@
           </v-row>
           <v-row>
             <div class="button login">
-              <router-link to="/login-registration">ログインする</router-link>
+              <router-link to="/login-or-signup">ログインする</router-link>
             </div>
           </v-row>
         </v-form>
