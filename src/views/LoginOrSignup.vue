@@ -33,11 +33,11 @@ import Signup from "@/components/LoginOrSignup/Signup.vue";
 export default {
   components: {
     Login,
-    Signup,
+    Signup
   },
   data() {
     return {
-      pageState: "registration",
+      pageState: "registration"
     };
   },
   methods: {
@@ -46,8 +46,8 @@ export default {
     },
     showLogin() {
       this.pageState = "login";
-    },
-  },
+    }
+  }
 };
 </script>
 
