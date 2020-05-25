@@ -12,8 +12,8 @@ Vue.config.productionTip = false;
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyDng5k79sZYfz2USU5DN65uTfopAJVxwj4",
-    libraries: "places"
-  }
+    libraries: "places",
+  },
 });
 
 var firebaseConfig = {
@@ -24,7 +24,7 @@ var firebaseConfig = {
   storageBucket: "dating-app-69e2e.appspot.com",
   messagingSenderId: "378673627606",
   appId: "1:378673627606:web:c8a59206a5c72986552477",
-  measurementId: "G-XHRTFQP83C"
+  measurementId: "G-XHRTFQP83C",
 };
 
 // Initialize Firebase
@@ -37,5 +37,5 @@ new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

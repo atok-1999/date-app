@@ -1,20 +1,16 @@
 <template>
   <div>
-    <div class="switchPage">
+    <div class="switch-page">
       <div
         @click="showRegistration"
         class="switch"
         :class="pageState === 'registration' ? 'darken-color' : ''"
-      >
-        会員登録
-      </div>
+      >会員登録</div>
       <div
         @click="showLogin"
         class="switch"
         :class="pageState === 'login' ? 'darken-color' : ''"
-      >
-        ログイン
-      </div>
+      >ログイン</div>
     </div>
     <div
       :class="
@@ -52,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.switchPage {
+.switch-page {
   cursor: pointer;
   position: relative;
   display: flex;

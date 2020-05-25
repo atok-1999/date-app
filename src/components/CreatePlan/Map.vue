@@ -2,18 +2,20 @@
   <div>
     <div id="map">
       <GmapMap
-        :center="{ lat: 34.7019399, lng: 135.51002519999997 }"
+        :center="{ lat: 35.7, lng: 139.7 }"
         :zoom="13"
         map-type-id="roadmap"
         style="width: 304px; height: 180px; margin-left: 22px; margin-top:19px;"
-      >
-      </GmapMap>
+      ></GmapMap>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {};
+  },
   methods: {}
 };
 </script>
