@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <!-- 編集・スポット画面切替バー -->
     <div class="switch-page">
       <div @click="showEdit" class="switch" :class="pageState === 'edit' ? 'darken-color' : ''">編集</div>
       <div
@@ -9,8 +10,9 @@
       >スポット検索</div>
     </div>
     <div :class="pageState === 'edit' ? 'underline-left' : 'underline-right'"></div>
-    <Edit v-if="pageState === 'edit'"></Edit>
-    <FindPlace v-if="pageState === 'search'"></FindPlace>
+    <!-- 編集画面＆スポット検索 -->
+    <Edit v-show="pageState === 'edit'"></Edit>
+    <FindPlace v-show="pageState === 'search'"></FindPlace>
   </div>
 </template>
 

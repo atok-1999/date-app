@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Map></Map>
     <div class="text-field-container">
       <v-text-field
         class="text-field"
@@ -12,14 +11,51 @@
         color="#d9b2ca"
         v-model="inputText"
       ></v-text-field>
-      <v-btn class="btn" depressed @click="search">検索</v-btn>
+      <v-btn class="search-btn" depressed @click="search">検索</v-btn>
     </div>
-    <div class="output">
+    <div v-show="outputState === 'list'" class="output">
       <v-row>
-        <v-col class="pa-0" v-for="(photo, index) in photos" :key="index" cols="4">
-          <img class="photo" height="105" width="121" :src="photo" />
+        <v-col class="pa-0" v-for="(output, index) in outputs" :key="index" cols="4">
+          <div class="photo-container">
+            <img
+              @click="showDetail(index)"
+              class="photo"
+              height="105"
+              width="123"
+              :src="output.photos[0].getUrl()"
+            />
+            <v-btn
+              @click="sendToFavList(index)"
+              class="check-btn"
+              fab
+              dark
+              x-small
+              :color="
+                favList.includes(outputs[index].place_id) ? 'pink' : '#F5F5F5'
+              "
+            >
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+          </div>
         </v-col>
       </v-row>
+    </div>
+    <div v-show="outputState === 'detail'" class="output">
+      <img :src="detailPhoto" width="340" />
+      <div>{{ detailName }}</div>
+      <div>{{ detailRating }}</div>
+      <div>{{ detailBusinessStatus }}</div>
+      <div>{{ detailAddress }}</div>
+      <div v-for="(review, index) in detailReviews" :key="index">
+        {{ review.author_name }}
+        {{ review.rating }}
+        {{ review.text }}
+        <br />
+      </div>
+      <div>
+        <a :href="detailUrl"></a>
+      </div>
+      <v-btn @click="showList">検索結果に戻る</v-btn>
     </div>
   </div>
 </template>
@@ -30,22 +66,31 @@
 ></script>
 
 <script>
-import Map from "@/components/CreatePlan/Map.vue";
-
 export default {
-  components: {
-    Map
-  },
   data() {
     return {
+      outputState: "list",
       inputText: "",
-      photos: []
+      outputs: [],
+      favList: [],
+      detailName: "",
+      detailPhoto: "",
+      detailRating: "",
+      detailBusinessStatus: "",
+      detailAddress: "",
+      detailReviews: [],
+      detailUrl: ""
     };
   },
   methods: {
     search() {
-      const vm = this;
-      const service = new google.maps.places.PlacesService(map);
+      this.outputs = [];
+      this.outputState = "list";
+      let vm = this;
+
+      const service = new google.maps.places.PlacesService(
+        document.createElement("div")
+      );
       service.textSearch(
         {
           location: new google.maps.LatLng(35.7, 139.7),
@@ -56,15 +101,69 @@ export default {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
             results.forEach(result => {
               console.log(result);
-              vm.insertPhotos(result);
+              vm.outputs.push(result);
             });
           }
         }
       );
       this.inputText = "";
     },
-    insertPhotos(result) {
-      this.photos.push(result.photos[0].getUrl());
+    showList() {
+      this.outputState = "list";
+    },
+    showDetail(index) {
+      this.outputState = "detail";
+
+      let vm = this;
+      const service = new google.maps.places.PlacesService(
+        document.createElement("div")
+      );
+      service.getDetails(
+        {
+          placeId: vm.outputs[index].place_id,
+          fields: [
+            "name",
+            "photos",
+            "rating",
+            "business_status",
+            "formatted_address",
+            "reviews",
+            "url"
+          ]
+        },
+        function(result, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            vm.detailName = result.name;
+            vm.detailPhoto = result.photos[0].getUrl();
+            vm.detailRating = result.rating;
+            vm.detailBusinessStatus = result.business_status;
+            vm.detailAddress = result.formatted_address;
+            vm.detailReviews = result.reviews;
+            vm.detailUrl = result.url;
+
+            vm.businessStatusTranslate();
+          }
+        }
+      );
+    },
+    businessStatusTranslate() {
+      if (this.detailBusinessStatus === "OPERATIONAL") {
+        this.detailBusinessStatus = "営業中";
+      } else if (this.detailBusinessStatus === "CLOSED_TEMPORARILY") {
+        this.detailBusinessStatus = "一時休業中";
+      } else if (this.detailBusinessStatus === "CLOSED_PERMANENTLY") {
+        this.detailBusinessStatus = "閉店";
+      }
+    },
+    sendToFavList(index) {
+      if (!this.favList.includes(this.outputs[index].place_id)) {
+        this.favList.push(this.outputs[index].place_id);
+      } else {
+        this.favList.splice(
+          this.favList.indexOf(this.outputs[index].place_id),
+          1
+        );
+      }
     }
   }
 };
@@ -83,12 +182,24 @@ export default {
     margin-top: 20px;
   }
 
-  & .btn {
+  & .search-btn {
     margin-left: 20px;
   }
 }
 
+.photo-container {
+  position: relative;
+}
+
+.check-btn {
+  position: absolute;
+  top: 3%;
+  right: 2%;
+}
+
 .output {
   max-width: 100%;
+  margin: 0 5px;
+  text-align: center;
 }
 </style>
