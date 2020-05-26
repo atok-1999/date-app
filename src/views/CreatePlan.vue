@@ -11,8 +11,8 @@
     </div>
     <div :class="pageState === 'edit' ? 'underline-left' : 'underline-right'"></div>
     <!-- 編集画面＆スポット検索 -->
-    <Edit v-show="pageState === 'edit'"></Edit>
-    <FindPlace v-show="pageState === 'search'"></FindPlace>
+    <Edit v-show="pageState === 'edit'" :favSpotsInfo="favSpots"></Edit>
+    <FindPlace v-show="pageState === 'search'" @addFavSpots="addFavSpots"></FindPlace>
   </div>
 </template>
 
@@ -27,7 +27,8 @@ export default {
   },
   data() {
     return {
-      pageState: "search"
+      pageState: "edit",
+      favSpots: []
     };
   },
   methods: {
@@ -36,6 +37,9 @@ export default {
     },
     showSearch() {
       this.pageState = "search";
+    },
+    addFavSpots(spots) {
+      this.favSpots = spots;
     }
   }
 };

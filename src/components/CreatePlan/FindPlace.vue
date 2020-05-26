@@ -25,13 +25,13 @@
               :src="output.photos[0].getUrl()"
             />
             <v-btn
-              @click="sendToFavList(index)"
+              @click="sendToFavSpots(index)"
               class="check-btn"
               fab
               dark
               x-small
               :color="
-                favList.includes(outputs[index].place_id) ? 'pink' : '#F5F5F5'
+                favSpots.includes(outputs[index].place_id) ? 'pink' : '#F5F5F5'
               "
             >
               <v-icon>mdi-heart</v-icon>
@@ -72,7 +72,7 @@ export default {
       outputState: "list",
       inputText: "",
       outputs: [],
-      favList: [],
+      favSpots: [],
       detailName: "",
       detailPhoto: "",
       detailRating: "",
@@ -155,15 +155,17 @@ export default {
         this.detailBusinessStatus = "閉店";
       }
     },
-    sendToFavList(index) {
-      if (!this.favList.includes(this.outputs[index].place_id)) {
-        this.favList.push(this.outputs[index].place_id);
+    sendToFavSpots(index) {
+      if (!this.favSpots.includes(this.outputs[index].place_id)) {
+        this.favSpots.push(this.outputs[index].place_id);
       } else {
-        this.favList.splice(
-          this.favList.indexOf(this.outputs[index].place_id),
+        this.favSpots.splice(
+          this.favSpots.indexOf(this.outputs[index].place_id),
           1
         );
       }
+
+      this.$emit("addFavSpots", this.favSpots);
     }
   }
 };
