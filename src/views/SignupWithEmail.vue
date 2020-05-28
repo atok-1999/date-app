@@ -3,7 +3,9 @@
     <div class="page-title">メールアドレスで登録する</div>
     <div class="content">
       <div class="box">
-        <div class="avatar-circle"></div>
+        <v-avatar color="#E0E0E0" size="70">
+          <v-icon dark large>mdi-account</v-icon>
+        </v-avatar>
         <v-form ref="form">
           <v-row>
             <v-col cols="1"></v-col>
@@ -34,25 +36,48 @@
                   color="#D9B2CA"
                 ></v-text-field>
               </v-row>
-              <v-row>
+              <!-- <v-row>
                 <div class="checkbox-container">
                   <input type="checkbox" class="checkbox-input" value />
-                  <label for="checkbox" class="checkbox-parts"
-                    >お知らせメールの配信を希望する</label
-                  >
+                  <label for="checkbox" class="checkbox-parts">お知らせメールの配信を希望する</label>
                 </div>
+              </v-row>-->
+              <v-row>
+                <div class="error-message">{{ errMessage }}</div>
               </v-row>
             </v-col>
             <v-col cols="1"></v-col>
           </v-row>
           <v-row>
-            <div @click="signup" class="button mail-adress">登録する</div>
+            <v-btn
+              @click.stop="signup"
+              :loading="loading"
+              :disabled="loading"
+              depressed
+              color="#d9b2ca"
+              width="130"
+              class="signup-btn white--text"
+            >登録する</v-btn>
           </v-row>
           <v-row>
             <div class="button login">
               <router-link to="/login-or-signup">ログインする</router-link>
             </div>
           </v-row>
+          <v-dialog v-model="dialog" max-width="290">
+            <v-card>
+              <v-card-text>
+                <div class="dialog-text">
+                  <div>ありがとうございます。</div>
+                  <div>会員登録が完了致しました。</div>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="#d9b2ca" text @click="dialog = false" to="/">ホームに戻る</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-form>
       </div>
     </div>
@@ -68,37 +93,51 @@ export default {
       userName: "",
       mailAddress: "",
       password: "",
+      dialog: false,
+      loading: false,
+      errMessage: ""
     };
   },
   methods: {
     signup() {
+      this.setLoader();
+
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.mailAddress, this.password)
-        .then((cred) => {
+        .then(cred => {
           let userInfo = {
             uid: cred.user.uid,
-            userName: this.userName,
+            userName: this.userName
           };
           return firebase
             .firestore()
             .collection("users")
             .doc(cred.user.uid)
             .set({
-              userInfo,
+              userInfo
             });
         })
         .then(() => {
           this.resetForm();
+
+          this.dialog = true;
         })
-        .catch((err) => {
-          console.log(err.message);
+        .catch(err => {
+          this.errMessage = err.message;
         });
     },
     resetForm() {
       this.$refs.form.reset();
     },
-  },
+    setLoader() {
+      this.loading = true;
+
+      setTimeout(() => {
+        this.loading = false;
+      }, 3000);
+    }
+  }
 };
 </script>
 
@@ -129,14 +168,6 @@ export default {
   padding: 30px;
 }
 
-.avatar-circle {
-  height: 80px;
-  width: 80px;
-  background-color: #cecdcd;
-  border-radius: 50%;
-  margin: 0 auto;
-}
-
 //チェックボックス
 .checkbox-container {
   display: flex;
@@ -150,6 +181,11 @@ export default {
   }
 }
 
+.signup-btn {
+  margin: 0 auto;
+  font-weight: bold;
+}
+
 .button {
   cursor: pointer;
   border-radius: 5px;
@@ -157,12 +193,6 @@ export default {
   font-weight: bold;
   color: #fff;
   margin: 0 auto;
-
-  &.mail-adress {
-    background-color: #d9b2ca;
-    padding: 10px 40px 10px 40px;
-    margin-top: 30px;
-  }
 
   &.login {
     padding: 10px 40px 10px 40px;
@@ -172,5 +202,17 @@ export default {
       color: #d9b2ca;
     }
   }
+}
+
+.dialog-text {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  color: red;
 }
 </style>
