@@ -17,6 +17,19 @@
         pageState === 'registration' ? 'underline-left' : 'underline-right'
       "
     ></div>
+    <v-dialog v-model="dialog" max-width="290">
+      <v-card>
+        <v-card-text>
+          <div class="dialog-text">
+            <div>あなたは既にログインしています。</div>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="#d9b2ca" text @click="dialog = false" to="/">ホームに戻る</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <Signup v-if="pageState === 'registration'"></Signup>
     <Login v-if="pageState === 'login'"></Login>
   </div>
@@ -25,6 +38,7 @@
 <script>
 import Login from "@/components/LoginOrSignup/Login.vue";
 import Signup from "@/components/LoginOrSignup/Signup.vue";
+import firebase from "firebase";
 
 export default {
   components: {
@@ -33,7 +47,8 @@ export default {
   },
   data() {
     return {
-      pageState: "registration"
+      pageState: "registration",
+      dialog: false
     };
   },
   methods: {
@@ -43,6 +58,13 @@ export default {
     showLogin() {
       this.pageState = "login";
     }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.dialog = true;
+      }
+    });
   }
 };
 </script>
@@ -81,5 +103,13 @@ export default {
   width: 50%;
   transform: translateX(100%);
   background-color: #d9b2ca;
+}
+
+.dialog-text {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

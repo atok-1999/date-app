@@ -6,7 +6,7 @@
         <v-icon dark large>mdi-account</v-icon>
       </v-avatar>
     </div>
-    <div class="user-info">こんにちは、user1さん</div>
+    <div class="user-info">こんにちは、{{ userName }}さん</div>
     <div class="options">
       <div class="option first">
         <v-icon class="icon">mdi-account</v-icon>プロフィール
@@ -25,7 +25,23 @@
 </template>
 
 <script>
-export default {};
+import firebase from "firebase";
+
+export default {
+  data() {
+    return {
+      userName: ""
+    };
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user);
+        this.userName = user.email;
+      }
+    });
+  }
+};
 </script>
 
 <style lang="scss" scoped>

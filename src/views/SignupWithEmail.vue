@@ -78,6 +78,19 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <v-dialog v-model="alreadyAMember" max-width="290">
+            <v-card>
+              <v-card-text>
+                <div class="dialog-text">
+                  <div>あなたは既にログインしています。</div>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="#d9b2ca" text @click="alreadyAMember = false" to="/">ホームに戻る</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-form>
       </div>
     </div>
@@ -95,7 +108,8 @@ export default {
       password: "",
       dialog: false,
       loading: false,
-      errMessage: ""
+      errMessage: "",
+      alreadyAMember: false
     };
   },
   methods: {
@@ -137,6 +151,13 @@ export default {
         this.loading = false;
       }, 3000);
     }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.alreadyAMember = true;
+      }
+    });
   }
 };
 </script>
