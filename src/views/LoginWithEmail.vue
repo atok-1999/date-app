@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       mailAddress: "",
-      password: "",
+      password: ""
     };
   },
   methods: {
@@ -60,11 +60,11 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.mailAddress, this.password)
         .then(console.log("Success!"))
-        .catch((err) => {
+        .catch(err => {
           console.log(err.message);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

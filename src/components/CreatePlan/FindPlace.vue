@@ -15,7 +15,12 @@
     </div>
     <div v-show="outputState === 'list'" class="output">
       <v-row>
-        <v-col class="pa-0" v-for="(output, index) in outputs" :key="index" cols="4">
+        <v-col
+          class="pa-0"
+          v-for="(output, index) in outputs"
+          :key="index"
+          cols="4"
+        >
           <div class="photo-container">
             <img
               @click="showDetail(index)"
@@ -160,7 +165,7 @@ export default {
         this.favSpots.push(this.outputs[index].place_id);
       } else {
         this.favSpots.splice(
-          this.favSpots.indexOf(this.outputs[index].place_id),
+          this.favSpots.indexOf(this.outputs[index].place_id.getUrl()),
           1
         );
       }

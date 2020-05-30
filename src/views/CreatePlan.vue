@@ -2,17 +2,30 @@
   <div class="content">
     <!-- 編集・スポット画面切替バー -->
     <div class="switch-page">
-      <div @click="showEdit" class="switch" :class="pageState === 'edit' ? 'darken-color' : ''">編集</div>
+      <div
+        @click="showEdit"
+        class="switch"
+        :class="pageState === 'edit' ? 'darken-color' : ''"
+      >
+        編集
+      </div>
       <div
         @click="showSearch"
         class="switch"
         :class="pageState === 'search' ? 'darken-color' : ''"
-      >スポット検索</div>
+      >
+        スポット検索
+      </div>
     </div>
-    <div :class="pageState === 'edit' ? 'underline-left' : 'underline-right'"></div>
+    <div
+      :class="pageState === 'edit' ? 'underline-left' : 'underline-right'"
+    ></div>
     <!-- 編集画面＆スポット検索 -->
     <Edit v-show="pageState === 'edit'" :favSpotsInfo="favSpots"></Edit>
-    <FindPlace v-show="pageState === 'search'" @addFavSpots="addFavSpots"></FindPlace>
+    <FindPlace
+      v-show="pageState === 'search'"
+      @addFavSpots="addFavSpots"
+    ></FindPlace>
   </div>
 </template>
 
@@ -45,11 +58,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .content {
-  max-width: 100%;
+  width: 100%;
 }
-
 .switch-page {
   cursor: pointer;
   position: relative;
@@ -61,23 +73,19 @@ export default {
   color: #a8a8a8;
   font-size: 14px;
 }
-
 .switch {
   display: flex;
   justify-content: center;
   width: 100%;
 }
-
 .darken-color {
   color: #000;
 }
-
 .underline-left {
   height: 3px;
   width: 50%;
   background-color: #d9b2ca;
 }
-
 .underline-right {
   height: 3px;
   width: 50%;
