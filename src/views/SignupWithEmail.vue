@@ -3,9 +3,18 @@
     <div class="page-title">メールアドレスで登録する</div>
     <div class="content">
       <div class="box">
-        <v-avatar color="#E0E0E0" size="70">
-          <v-icon dark large>mdi-account</v-icon>
-        </v-avatar>
+        <div class="image-container">
+          <v-avatar color="#E0E0E0" size="70">
+            <img v-if="imageFromChild" :src="imageFromChild" />
+            <v-icon v-else dark large>mdi-account</v-icon>
+          </v-avatar>
+          <ImageUploader
+            :ready="readyToUploadImage"
+            :uid="uid"
+            @getImage="imageName"
+            class="image-uploader"
+          ></ImageUploader>
+        </div>
         <v-form ref="form">
           <v-row>
             <v-col cols="1"></v-col>
@@ -99,8 +108,12 @@
 
 <script>
 import firebase from "@/main.js";
+import ImageUploader from "@/components/ImageUploader/ImageUploader.vue";
 
 export default {
+  components: {
+    ImageUploader
+  },
   data() {
     return {
       userName: "",
@@ -109,7 +122,10 @@ export default {
       dialog: false,
       loading: false,
       errMessage: "",
-      alreadyAMember: false
+      alreadyAMember: false,
+      imageFromChild: "",
+      uid: "",
+      readyToUploadImage: false
     };
   },
   methods: {
@@ -124,6 +140,9 @@ export default {
             uid: cred.user.uid,
             userName: this.userName
           };
+
+          this.uid = userInfo.uid;
+
           return firebase
             .firestore()
             .collection("users")
@@ -133,6 +152,8 @@ export default {
             });
         })
         .then(() => {
+          this.readyToUploadImage = true;
+
           this.resetForm();
 
           this.dialog = true;
@@ -150,15 +171,18 @@ export default {
       setTimeout(() => {
         this.loading = false;
       }, 3000);
+    },
+    imageName(imageName) {
+      this.imageFromChild = imageName;
     }
-  },
-  created() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.alreadyAMember = true;
-      }
-    });
   }
+  // created() {
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if (user) {
+  //       this.alreadyAMember = true;
+  //     }
+  //   });
+  // }
 };
 </script>
 
@@ -235,5 +259,16 @@ export default {
 
 .error-message {
   color: red;
+}
+
+//画像アップロード
+.image-container {
+  position: relative;
+}
+
+.image-uploader {
+  position: absolute;
+  right: 37%;
+  top: 77%;
 }
 </style>

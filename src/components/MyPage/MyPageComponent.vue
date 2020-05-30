@@ -38,6 +38,8 @@ export default {
       if (user) {
         console.log(user);
         this.userName = user.email;
+      } else {
+        this.userName = "ゲスト";
       }
     });
   }
