@@ -11,7 +11,7 @@
           <ImageUploader
             :ready="readyToUploadImage"
             :uid="uid"
-            @getImage="imageName"
+            @getImage="blobImage"
             class="image-uploader"
           ></ImageUploader>
         </div>
@@ -172,17 +172,17 @@ export default {
         this.loading = false;
       }, 3000);
     },
-    imageName(imageName) {
-      this.imageFromChild = imageName;
+    blobImage(blobImage) {
+      this.imageFromChild = blobImage;
     }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user && this.readyToUploadImage === false) {
+        this.alreadyAMember = true;
+      }
+    });
   }
-  // created() {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if (user) {
-  //       this.alreadyAMember = true;
-  //     }
-  //   });
-  // }
 };
 </script>
 

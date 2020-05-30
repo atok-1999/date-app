@@ -31,7 +31,7 @@ export default {
 
       //Firebase StorageにはAuthorizedなUserしかアップロードできないため、
       //親コンポーネントで登録が完了されるまで画像を一時保存
-      this.$emit("getImage", file.name);
+      this.$emit("getImage", window.URL.createObjectURL(file));
     },
     actuallyUpload() {
       //登録が完了されたら
