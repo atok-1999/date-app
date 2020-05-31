@@ -31,7 +31,9 @@
               dark
               x-small
               :color="
-                favSpots.includes(outputs[index].place_id) ? 'pink' : '#F5F5F5'
+                favSpots.some(spot => spot.place_id === outputs[index].place_id)
+                  ? 'pink'
+                  : '#F5F5F5'
               "
             >
               <v-icon>mdi-heart</v-icon>
@@ -156,15 +158,23 @@ export default {
       }
     },
     sendToFavSpots(index) {
-      if (!this.favSpots.includes(this.outputs[index].place_id)) {
-        this.favSpots.push(this.outputs[index].place_id);
+      if (
+        !this.favSpots.some(
+          spot => spot.place_id === this.outputs[index].place_id
+        )
+      ) {
+        this.favSpots.push({
+          place_id: this.outputs[index].place_id,
+          photoURl: this.outputs[index].photos[0].getUrl()
+        });
       } else {
         this.favSpots.splice(
-          this.favSpots.indexOf(this.outputs[index].place_id),
+          this.favSpots.findIndex(
+            spot => spot.place_id === this.outputs[index].place_id
+          ),
           1
         );
       }
-
       this.$emit("addFavSpots", this.favSpots);
     }
   }
