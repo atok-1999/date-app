@@ -5,6 +5,7 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import firebase from "firebase";
 import "firebase/firestore";
+import "firebase/storage";
 import * as VueGoogleMaps from "vue2-google-maps";
 
 Vue.config.productionTip = false;
