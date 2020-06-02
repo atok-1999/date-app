@@ -111,7 +111,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 30px;
 }
 
@@ -125,7 +125,7 @@ export default {
 }
 
 .box {
-  height: 500px;
+  height: 350px;
   width: 85%;
   border: 1px solid #bbbbbb;
   border-radius: 5px;

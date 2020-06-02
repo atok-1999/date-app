@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <Header></Header>
-    <img class="image" src='@/assets/header-logo/header-top.png'>
+  <div class="content">
+    <img class="image" src="@/assets/header-logo/header-top.png" />
     <div class="container">
       <div class="make">Dating plan を作る</div>
     </div>
@@ -27,16 +26,14 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-
-export default {
-  components: {
-    Header
-  }
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>
+.content {
+  min-height: 100vh;
+}
+
 .image {
   display: block;
   width: 100%;
@@ -58,8 +55,8 @@ export default {
   align-items: center;
   width: 139px;
   height: 32px;
-  color: #D1AABE;
-  border: 1px solid #D1AABE;
+  color: #d1aabe;
+  border: 1px solid #d1aabe;
   border-radius: 16px;
   font-size: 12px;
 }
@@ -95,4 +92,3 @@ export default {
   margin-top: 25px;
 }
 </style>
-

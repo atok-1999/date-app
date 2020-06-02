@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <div class="switch-page">
       <div
         @click="showRegistration"
@@ -70,6 +70,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.content {
+  min-height: 100vh;
+}
+
 .switch-page {
   cursor: pointer;
   position: relative;

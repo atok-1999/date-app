@@ -210,7 +210,9 @@
       </div>
     </div>
     <div class="choice-spots">
-      <div><v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots</div>
+      <div>
+        <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
+      </div>
       <div class="fav-spots">
         <v-col>
           <v-row v-for="(favSpot, index) in favSpotsInfo" :key="index">
@@ -237,7 +239,9 @@
     </div>
 
     <div>
-      <p class="choice-spots"><v-icon>bookmarks</v-icon>recommended Spots</p>
+      <p class="choice-spots">
+        <v-icon>mdi-bookmark</v-icon>recommended Spots
+      </p>
       <div class="spots"></div>
     </div>
   </div>

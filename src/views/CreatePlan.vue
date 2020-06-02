@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <Header></Header>
     <!-- 編集・スポット画面切替バー -->
     <div class="switch-page">
       <div @click="showEdit" class="switch" :class="pageState === 'edit' ? 'darken-color' : ''">編集</div>
@@ -20,13 +19,11 @@
 <script>
 import Edit from "@/components/CreatePlan/Edit.vue";
 import FindPlace from "@/components/CreatePlan/FindPlace.vue";
-import Header from "@/components/Header.vue";
 
 export default {
   components: {
     FindPlace,
-    Edit,
-    Header
+    Edit
   },
   data() {
     return {

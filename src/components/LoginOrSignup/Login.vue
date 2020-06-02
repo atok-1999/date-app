@@ -1,7 +1,8 @@
 <template>
   <div class="content">
     <div class="privacy-policy">
-      <a href="#">利用規約</a>と <a href="#">プライバシーポリシー</a>に同意の上
+      <a href="#">利用規約</a>と
+      <a href="#">プライバシーポリシー</a>に同意の上
       <br />会員登録 / ログインして下さい
     </div>
     <div class="box">
@@ -24,7 +25,7 @@ export default {};
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
   max-width: 100%;
   margin-top: 75px;
