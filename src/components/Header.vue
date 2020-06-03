@@ -35,15 +35,15 @@
             ><i class="fas fa-home"></i
             ><span class="aa">Home</span></router-link
           >
-          <router-link to="/"
+          <router-link to="/about"
             ><i class="fas fa-heart"></i
             ><span class="aa">Favorite</span></router-link
           >
-          <router-link to="/"
+          <router-link to="#"
             ><i class="fas fa-bookmark"></i
             ><span class="aa">ChoicePhoto</span></router-link
           >
-          <router-link to="/"
+          <router-link to="#"
             ><i class="fas fa-search"></i
             ><span class="aa">Search</span></router-link
           >
