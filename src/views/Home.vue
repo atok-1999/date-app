@@ -3,24 +3,32 @@
     <Header></Header>
     <img class="image" src="@/assets/header-logo/header-top.png" />
     <div class="container">
-      <div class="make">Dating plan を作る</div>
+      <router-link to="/create-plan" style="text-decoration: none;">
+        <div class="make">Dating plan を作る</div>
+      </router-link>
     </div>
     <div class="circle-container">
       <div class="center">
-        <div class="circle-menu">
-          <i class="fas fa-crown"></i>
-          <span>Ranking</span>
-        </div>
+        <router-link to="/" style="text-decoration: none;">
+          <div class="circle-menu">
+            <i class="fas fa-crown"></i>
+            <span>Ranking</span>
+          </div>
+        </router-link>
       </div>
       <div class="circle">
-        <div class="circle-menu">
-          <i class="fas fa-search"></i>
-          <span>Search</span>
-        </div>
-        <div class="circle-menu">
-          <i class="fas fa-heart"></i>
-          <span>Favorite</span>
-        </div>
+        <router-link to="/" style="text-decoration: none;">
+          <div class="circle-menu">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </div>
+        </router-link>
+        <router-link to="/" style="text-decoration: none;">
+          <div class="circle-menu">
+            <i class="fas fa-heart"></i>
+            <span>Favorite</span>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -65,7 +73,7 @@ export default {
 }
 
 .center {
-  margin-left: 125px;
+  margin-left: 132px;
 }
 
 .circle-menu {
@@ -88,7 +96,7 @@ export default {
 }
 .circle {
   display: flex;
-  margin-left: 75px;
+  margin-left: 82px;
 }
 
 .circle-container {

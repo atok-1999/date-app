@@ -25,7 +25,11 @@
             <div class="au">ゲスト<span class="ai">さん</span></div>
           </div>
         </div>
-        <div class="login">会員登録 / ログインする</div>
+        <div class="login">
+          <router-link to="/login-or-signup" style="color: black;"
+            >会員登録 / ログインする</router-link
+          >
+        </div>
         <div class="back-2">
           <router-link to="/"
             ><i class="fas fa-home"></i
@@ -215,7 +219,6 @@ export default {
 
 .login {
   background-color: white;
-  color: black;
   border-radius: 5px;
   height: 40px;
   width: 64%;
@@ -225,6 +228,7 @@ export default {
   justify-content: center;
   margin-bottom: 70px;
   font-size: 13px;
+  color: black;
 }
 
 .icon {

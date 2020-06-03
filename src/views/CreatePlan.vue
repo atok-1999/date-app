@@ -1,6 +1,8 @@
 <template>
   <div class="content">
-    <Header></Header>
+    <div class="header-component">
+      <Header></Header>
+    </div>
     <!-- 編集・スポット画面切替バー -->
     <div class="switch-page">
       <div
