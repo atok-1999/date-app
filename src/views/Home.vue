@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <img class="image" src='@/assets/header-logo/header-top.png'>
+    <img class="image" src="@/assets/header-logo/header-top.png" />
     <div class="container">
       <div class="make">Dating plan を作る</div>
     </div>
@@ -33,7 +33,7 @@ export default {
   components: {
     Header
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -58,8 +58,8 @@ export default {
   align-items: center;
   width: 139px;
   height: 32px;
-  color: #D1AABE;
-  border: 1px solid #D1AABE;
+  color: #d1aabe;
+  border: 1px solid #d1aabe;
   border-radius: 16px;
   font-size: 12px;
 }
@@ -95,4 +95,3 @@ export default {
   margin-top: 25px;
 }
 </style>
-

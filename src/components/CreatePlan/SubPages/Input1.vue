@@ -1,69 +1,107 @@
 <template>
   <div v-on:input="submit">
-    <p class="content">Ⅰ タイトルを入力する</p>
-    <v-col cols="12" sm="6">
-      <v-text-field
-        class="text-field"
-        label="Title"
-        outlined
-        dense
-        v-model="inputTitle1"
-      ></v-text-field>
-    </v-col>
-    <p class="content">Ⅱ 写真を追加する</p>
-    <div class="photo">+</div>
-    <p class="content">Ⅲ 時間を入力</p>
-    <div class="time">
-      <v-col class="d-flex" cols="4" md="2">
-        <v-select
-          :items="items"
-          label="AM/PM"
+    <div v-show="outputState === 'list'" class="output">
+      <p class="content">Ⅰ タイトルを入力する</p>
+      <v-col cols="12" sm="6">
+        <v-text-field
+          class="text-field"
+          label="Title"
+          outlined
           dense
-          v-model="items1"
-        ></v-select>
+          v-model="inputTitle1"
+        ></v-text-field>
       </v-col>
-      <v-col class="d-flex" cols="4" md="2">
-        <v-select
-          :items="hours"
-          label="hours"
-          dense
-          v-model="hours1"
-        ></v-select>
+      <p class="content">Ⅱ 写真を追加する</p>
+      <div class="photo"></div>
+      <p class="content">Ⅲ 時間を入力</p>
+      <div class="time">
+        <v-col class="d-flex" cols="4" md="2">
+          <v-select
+            :items="items"
+            label="AM/PM"
+            dense
+            v-model="items1"
+          ></v-select>
+        </v-col>
+        <v-col class="d-flex" cols="4" md="2">
+          <v-select
+            :items="hours"
+            label="hours"
+            dense
+            v-model="hours1"
+          ></v-select>
+        </v-col>
+        <p class="middle">:</p>
+        <v-col class="d-flex" cols="4" md="2">
+          <v-select
+            :items="minutes"
+            label="minutes"
+            dense
+            v-model="minutes1"
+          ></v-select>
+        </v-col>
+      </div>
+      <p class="content">Ⅳ プランを入力</p>
+      <v-col cols="12" sm="6">
+        <v-textarea
+          label="Plan"
+          auto-grow
+          outlined
+          rows="2"
+          row-height="15"
+          v-model="inputPlan1"
+        ></v-textarea>
       </v-col>
-      <p class="middle">:</p>
-      <v-col class="d-flex" cols="4" md="2">
-        <v-select
-          :items="minutes"
-          label="minutes"
-          dense
-          v-model="minutes1"
-        ></v-select>
-      </v-col>
+      <div>
+        <p class="choiceSpots">
+          <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
+        </p>
+        <p class="ok">完了</p>
+        <div class="spots">
+          <div class="pho" v-for="(photo, index) in photoFav" :key="index">
+            <div class="photofav">
+              <img
+                @click="detail(index)"
+                class="photos"
+                height="85"
+                width="85"
+                :src="photo.photoURl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="choiceSpots">
+          <v-icon>mdi-bookmark-multiple-outline</v-icon>recommended Spots
+        </p>
+        <div class="spots"></div>
+      </div>
     </div>
-    <p class="content">Ⅳ プランを入力</p>
-    <v-col cols="12" sm="6">
-      <v-textarea
-        label="Plan"
-        auto-grow
-        outlined
-        rows="2"
-        row-height="15"
-        v-model="inputPlan1"
-      ></v-textarea>
-    </v-col>
-    <div>
-      <p class="choiceSpots">
-        <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
-      </p>
-      <p class="ok">完了</p>
-      <div class="spots"></div>
-    </div>
-    <div>
-      <p class="choiceSpots"><v-icon>bookmarks</v-icon>recommended Spots</p>
-      <div class="spots"></div>
+    <div v-show="outputState === 'detail'" class="output">
+      <img :src="detailPhoto" width="300" />
+      <div>{{ detailName }}</div>
+      <div>{{ detailRating }}</div>
+      <div>{{ detailBusinessStatus }}</div>
+      <div>{{ detailAddress }}</div>
+      <div v-for="(review, index) in detailReviews" :key="index">
+        {{ review.author_name }}
+        {{ review.rating }}
+        {{ review.text }}
+        <br />
+      </div>
+      <div>
+        <a :href="detailUrl"></a>
+      </div>
+      <v-btn @click="showList">プラン作成に戻る</v-btn>
     </div>
   </div>
 </template>
+
+<script
+  type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDng5k79sZYfz2USU5DN65uTfopAJVxwj4&libraries=places"
+></script>
 
 <script>
 export default {
@@ -76,7 +114,15 @@ export default {
       inputPlan1: "",
       items1: "",
       hours1: "",
-      minutes1: ""
+      minutes1: "",
+      outputState: "list",
+      detailName: "",
+      detailPhoto: "",
+      detailRating: "",
+      detailBusinessStatus: "",
+      detailAddress: "",
+      detailReviews: [],
+      detailUrl: ""
     };
   },
   methods: {
@@ -88,8 +134,54 @@ export default {
         hours1: this.hours1,
         minutes1: this.minutes1
       });
+    },
+    showList() {
+      this.outputState = "list";
+    },
+    detail(index) {
+      this.outputState = "detail";
+
+      let vm = this;
+      const service = new google.maps.places.PlacesService(map);
+      service.getDetails(
+        {
+          placeId: vm.photoFav[index].place_id,
+          fields: [
+            "name",
+            "photos",
+            "rating",
+            "business_status",
+            "formatted_address",
+            "reviews",
+            "url"
+          ]
+        },
+        function(result, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            vm.detailName = result.name;
+            vm.detailPhoto = result.photos[0].getUrl();
+            vm.detailRating = result.rating;
+            vm.detailBusinessStatus = result.business_status;
+            vm.detailAddress = result.formatted_address;
+            vm.detailReviews = result.reviews;
+            vm.detailUrl = result.url;
+
+            vm.businessStatusTranslate();
+          }
+        }
+      );
+    },
+    businessStatusTranslate() {
+      if (this.detailBusinessStatus === "OPERATIONAL") {
+        this.detailBusinessStatus = "営業中";
+      } else if (this.detailBusinessStatus === "CLOSED_TEMPORARILY") {
+        this.detailBusinessStatus = "一時休業中";
+      } else if (this.detailBusinessStatus === "CLOSED_PERMANENTLY") {
+        this.detailBusinessStatus = "閉店";
+      }
     }
-  }
+  },
+  props: ["photoFav"]
 };
 </script>
 
@@ -131,11 +223,17 @@ export default {
   color: #707070;
   border: 0.8px solid #707070;
 }
+
 .spots {
   border: 0.3px solid #707070;
   width: 300px;
-  height: 200px;
+  height: 220px;
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 .time {
   display: flex;
@@ -143,5 +241,8 @@ export default {
 }
 .middle {
   margin-top: 20px;
+}
+.photos {
+  margin: 3px 5px 0 5px;
 }
 </style>
