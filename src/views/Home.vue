@@ -1,26 +1,34 @@
 <template>
   <div>
     <Header></Header>
-    <img class="image" src='@/assets/header-logo/header-top.png'>
+    <img class="image" src="@/assets/header-logo/header-top.png" />
     <div class="container">
-      <div class="make">Dating plan を作る</div>
+      <router-link to="/create-plan" style="text-decoration: none;">
+        <div class="make">Dating plan を作る</div>
+      </router-link>
     </div>
     <div class="circle-container">
       <div class="center">
-        <div class="circle-menu">
-          <i class="fas fa-crown"></i>
-          <span>Ranking</span>
-        </div>
+        <router-link to="/" style="text-decoration: none;">
+          <div class="circle-menu">
+            <i class="fas fa-crown"></i>
+            <span>Ranking</span>
+          </div>
+        </router-link>
       </div>
       <div class="circle">
-        <div class="circle-menu">
-          <i class="fas fa-search"></i>
-          <span>Search</span>
-        </div>
-        <div class="circle-menu">
-          <i class="fas fa-heart"></i>
-          <span>Favorite</span>
-        </div>
+        <router-link to="/" style="text-decoration: none;">
+          <div class="circle-menu">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </div>
+        </router-link>
+        <router-link to="/" style="text-decoration: none;">
+          <div class="circle-menu">
+            <i class="fas fa-heart"></i>
+            <span>Favorite</span>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -33,7 +41,7 @@ export default {
   components: {
     Header
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -58,14 +66,14 @@ export default {
   align-items: center;
   width: 139px;
   height: 32px;
-  color: #D1AABE;
-  border: 1px solid #D1AABE;
+  color: #d1aabe;
+  border: 1px solid #d1aabe;
   border-radius: 16px;
   font-size: 12px;
 }
 
 .center {
-  margin-left: 125px;
+  margin-left: 132px;
 }
 
 .circle-menu {
@@ -88,11 +96,10 @@ export default {
 }
 .circle {
   display: flex;
-  margin-left: 75px;
+  margin-left: 82px;
 }
 
 .circle-container {
   margin-top: 25px;
 }
 </style>
-

@@ -2,13 +2,17 @@
   <div id="app">
     <header class="header">
       <div class="header__menu">
-        <div class="header__menu__line" @click="naviOpen" :class="{'is-active': active}">
-          <span :class="{'white': active}"></span>
-          <span :class="{'white': active}"></span>
-          <span :class="{'white': active}"></span>
+        <div
+          class="header__menu__line"
+          @click="naviOpen"
+          :class="{ 'is-active': active }"
+        >
+          <span :class="{ white: active }"></span>
+          <span :class="{ white: active }"></span>
+          <span :class="{ white: active }"></span>
         </div>
         <div>
-          <span :class="{'white-color': active}">menu</span>
+          <span :class="{ 'white-color': active }">menu</span>
         </div>
       </div>
     </header>
@@ -17,16 +21,32 @@
         <div class="ami">
           <div class="icon"><i class="fas fa-user-circle"></i></div>
           <div class="hitoshi">
-              <span class="ai">こんにちは</span>
-              <div class="au">ゲスト<span class="ai">さん</span></div>
+            <span class="ai">こんにちは</span>
+            <div class="au">ゲスト<span class="ai">さん</span></div>
           </div>
         </div>
-        <div class="login">会員登録 / ログインする</div>
+        <div class="login">
+          <router-link to="/login-or-signup" style="color: black;"
+            >会員登録 / ログインする</router-link
+          >
+        </div>
         <div class="back-2">
-          <router-link to="/"><i class="fas fa-home"></i><span class="aa">Home</span></router-link>
-          <router-link to="/about"><i class="fas fa-heart"></i><span class="aa">Favorite</span></router-link>
-          <router-link to="#"><i class="fas fa-bookmark"></i><span class="aa">ChoicePhoto</span></router-link>
-          <router-link to="#"><i class="fas fa-search"></i><span class="aa">Search</span></router-link>
+          <router-link to="/"
+            ><i class="fas fa-home"></i
+            ><span class="aa">Home</span></router-link
+          >
+          <router-link to="/"
+            ><i class="fas fa-heart"></i
+            ><span class="aa">Favorite</span></router-link
+          >
+          <router-link to="/"
+            ><i class="fas fa-bookmark"></i
+            ><span class="aa">ChoicePhoto</span></router-link
+          >
+          <router-link to="/"
+            ><i class="fas fa-search"></i
+            ><span class="aa">Search</span></router-link
+          >
         </div>
       </div>
     </transition>
@@ -199,7 +219,6 @@ export default {
 
 .login {
   background-color: white;
-  color: black;
   border-radius: 5px;
   height: 40px;
   width: 64%;
@@ -209,6 +228,7 @@ export default {
   justify-content: center;
   margin-bottom: 70px;
   font-size: 13px;
+  color: black;
 }
 
 .icon {
