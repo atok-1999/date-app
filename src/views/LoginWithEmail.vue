@@ -25,20 +25,40 @@
                   color="#D9B2CA"
                 ></v-text-field>
               </v-row>
+              <v-row>
+                <div class="error-message">{{ errMessage }}</div>
+              </v-row>
             </v-col>
             <v-col cols="1"></v-col>
           </v-row>
           <v-row>
-            <div @click="login" class="button mail-adress login">
-              ログインする
-            </div>
+            <v-btn
+              @click.stop="login"
+              :loading="loading"
+              :disabled="loading"
+              depressed
+              color="#d9b2ca"
+              width="130"
+              class="login-btn white--text"
+            >ログインする</v-btn>
           </v-row>
           <v-row class="button signup">
-            <router-link to="/signup-with-email">
-              新規会員登録する
-            </router-link>
+            <router-link to="/signup-with-email">新規会員登録する</router-link>
           </v-row>
         </v-form>
+        <v-dialog v-model="dialog" max-width="290">
+          <v-card>
+            <v-card-text>
+              <div class="dialog-text">
+                <div>あなたは既にログインしています。</div>
+              </div>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="#d9b2ca" text @click="dialog = false" to="/">ホームに戻る</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </div>
     </div>
   </div>
@@ -52,19 +72,37 @@ export default {
     return {
       mailAddress: "",
       password: "",
+      errMessage: "",
+      loading: false,
+      dialog: false
     };
   },
   methods: {
     login() {
+      this.setLoader();
+
       firebase
         .auth()
         .signInWithEmailAndPassword(this.mailAddress, this.password)
-        .then(console.log("Success!"))
-        .catch((err) => {
-          console.log(err.message);
+        .catch(err => {
+          this.errMessage = err.message;
         });
     },
+    setLoader() {
+      this.loading = true;
+
+      setTimeout(() => {
+        this.loading = false;
+      }, 3000);
+    }
   },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.dialog = true;
+      }
+    });
+  }
 };
 </script>
 
@@ -116,5 +154,22 @@ export default {
     color: #d9b2ca;
     margin: 0 auto;
   }
+}
+
+.login-btn {
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+.dialog-text {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  color: red;
 }
 </style>
