@@ -22,7 +22,11 @@
       <div v-show="good">
         <div class="plan-title">{{ plan.inputTitle1 }}</div>
         <div class="plan">
-          <div class="add-plan"></div>
+          <div class="add-plan">
+            <div class="photo-spot">
+              <img :src="plan.spotPhoto" height="48" width="48" />
+            </div>
+          </div>
           <div class="time-schedule">
             <div class="times">
               <p>{{ plan.items1 }}</p>
@@ -418,7 +422,7 @@ export default {
   width: 48px;
   height: 48px;
   text-align: center;
-  padding-top: 10px;
+
   margin-top: 56px;
   margin-left: 30px;
   margin-right: 31px;

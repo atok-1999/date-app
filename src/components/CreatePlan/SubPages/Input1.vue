@@ -12,7 +12,12 @@
         ></v-text-field>
       </v-col>
       <p class="content">Ⅱ 写真を追加する</p>
-      <div class="photo"></div>
+      <div class="photo" @click="choiceSpotPhoto">
+        <div v-show="plus" class="plus">+</div>
+        <div v-show="photoChoice" class="choice-photos">
+          <img :src="spotPhoto" height="100" width="100" />
+        </div>
+      </div>
       <p class="content">Ⅲ 時間を入力</p>
       <div class="time">
         <v-col class="d-flex" cols="4" md="2">
@@ -56,7 +61,7 @@
         <p class="choiceSpots">
           <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
         </p>
-        <p class="ok">完了</p>
+        <div class="ok" @click="setPhoto">完了</div>
         <div class="spots">
           <div class="pho" v-for="(photo, index) in photoFav" :key="index">
             <div class="photofav">
@@ -67,6 +72,11 @@
                 width="85"
                 :src="photo.photoURl"
               />
+              <v-checkbox
+                v-model="choicePhotos"
+                v-show="button"
+                :value="photoFav[index].photoURl"
+              ></v-checkbox>
             </div>
           </div>
         </div>
@@ -122,7 +132,12 @@ export default {
       detailBusinessStatus: "",
       detailAddress: "",
       detailReviews: [],
-      detailUrl: ""
+      detailUrl: "",
+      button: false,
+      spotPhoto: null,
+      choicePhotos: [],
+      plus: true,
+      photoChoice: false
     };
   },
   methods: {
@@ -132,7 +147,8 @@ export default {
         inputPlan1: this.inputPlan1,
         items1: this.items1,
         hours1: this.hours1,
-        minutes1: this.minutes1
+        minutes1: this.minutes1,
+        spotPhoto: this.spotPhoto
       });
     },
     showList() {
@@ -179,6 +195,14 @@ export default {
       } else if (this.detailBusinessStatus === "CLOSED_PERMANENTLY") {
         this.detailBusinessStatus = "閉店";
       }
+    },
+    choiceSpotPhoto() {
+      this.button = true;
+    },
+    setPhoto(index) {
+      this.plus = false;
+      this.photoChoice = true;
+      this.spotPhoto = this.choicePhotos[0];
     }
   },
   props: ["photoFav"]
@@ -219,7 +243,6 @@ export default {
   width: 116px;
   height: 116px;
   text-align: center;
-  padding-top: 45px;
   color: #707070;
   border: 0.8px solid #707070;
 }
@@ -244,5 +267,11 @@ export default {
 }
 .photos {
   margin: 3px 5px 0 5px;
+}
+.plus {
+  padding-top: 45px;
+}
+.choice-photos {
+  padding-top: 8px;
 }
 </style>
