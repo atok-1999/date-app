@@ -8,12 +8,12 @@
             <img v-if="imageFromChild" :src="imageFromChild" />
             <v-icon v-else dark large>mdi-account</v-icon>
           </v-avatar>
-          <ImageUploader
+          <ProfileImageUploader
             :ready="readyToUploadImage"
             :uid="uid"
             @getImage="blobImage"
             class="image-uploader"
-          ></ImageUploader>
+          ></ProfileImageUploader>
         </div>
         <v-form ref="form">
           <v-row>
@@ -108,11 +108,11 @@
 
 <script>
 import firebase from "@/main.js";
-import ImageUploader from "@/components/ImageUploader/ImageUploader.vue";
+import ProfileImageUploader from "@/components/ImageUploader/ProfileImageUploader.vue";
 
 export default {
   components: {
-    ImageUploader
+    ProfileImageUploader
   },
   data() {
     return {
@@ -178,8 +178,12 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
-      if (user && this.readyToUploadImage === false) {
-        this.alreadyAMember = true;
+      if (user) {
+        setTimeout(() => {
+          if (this.dialog === false) {
+            this.alreadyAMember = true;
+          }
+        }, 2000);
       }
     });
   }
@@ -191,7 +195,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 30px;
 }
 

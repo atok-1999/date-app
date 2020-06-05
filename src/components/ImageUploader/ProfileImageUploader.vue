@@ -54,9 +54,7 @@ export default {
           .then(url => {
             // storage にアップロードしたファイルに対応するドキュメントを保存する
             const image = {
-              fileName: this.file.name,
-              fileUrl: url,
-              fileCreatedAt: createdAt
+              profileImageUrl: url
             };
             return firebase
               .firestore()
@@ -95,8 +93,8 @@ export default {
 }
 
 .label-image-uploader {
-  height: 30px;
-  width: 30px;
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
   background-color: rgb(217, 178, 202);
   color: #fff;

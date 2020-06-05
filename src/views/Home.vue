@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <Header></Header>
+  <div class="content">
     <img class="image" src="@/assets/header-logo/header-top.png" />
     <div class="container">
       <router-link to="/create-plan" style="text-decoration: none;">
@@ -35,16 +34,14 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-
-export default {
-  components: {
-    Header
-  }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
+.content {
+  min-height: 100vh;
+}
+
 .image {
   display: block;
   width: 100%;

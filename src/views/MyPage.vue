@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <div class="page-title">マイページ</div>
     <MyPageComponent></MyPageComponent>
   </div>
@@ -16,6 +16,10 @@ export default {
 </script>
 
 <style>
+.content {
+  min-height: 100vh;
+}
+
 .page-title {
   background-color: #efeded;
   padding: 6px 0;
