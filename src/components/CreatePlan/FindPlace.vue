@@ -15,7 +15,12 @@
     </div>
     <div v-show="outputState === 'list'" class="output">
       <v-row>
-        <v-col class="pa-0" v-for="(output, index) in outputs" :key="index" cols="4">
+        <v-col
+          class="pa-0"
+          v-for="(output, index) in outputs"
+          :key="index"
+          cols="4"
+        >
           <div class="photo-container">
             <img
               @click="showDetail(index)"
@@ -44,15 +49,26 @@
     </div>
     <div v-show="outputState === 'detail'" class="output">
       <img :src="detailPhoto" width="340" />
-      <div>{{ detailName }}</div>
-      <div>{{ detailRating }}</div>
-      <div>{{ detailBusinessStatus }}</div>
-      <div>{{ detailAddress }}</div>
+      <div class="return">
+        <i class="fas fa-undo-alt"></i>
+        <span>画像一覧に戻る</span>
+      </div>
+      <div class="shop-container">
+        <div class="shop-name">{{ detailName }}</div>
+        <div class="detailBusinessStatus">{{ detailBusinessStatus }}</div>
+      </div>
+      <div class="detailAddress">{{ detailAddress }}</div>
+      <div class="shokurepo-container">
+        <div class="syokurepo">みんなの食レポ</div>
+      </div>
       <div v-for="(review, index) in detailReviews" :key="index">
-        {{ review.author_name }}
-        {{ review.rating }}
-        {{ review.text }}
-        <br />
+        <div class="text-container">
+          <div class="name-container">
+            <div class="name">{{ review.author_name }}</div>
+            <div class="rate">{{ review.rating }}</div>
+          </div>
+          <div class="text">{{ review.text }}</div>
+        </div>
       </div>
       <div>
         <a :href="detailUrl"></a>
@@ -217,5 +233,79 @@ export default {
   max-width: 100%;
   margin: 0 5px;
   text-align: center;
+}
+
+.return {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 15px;
+  font-size: 10px;
+}
+
+.fa-undo-alt {
+  font-size: 10px;
+  padding-top: 3px;
+  margin-right: 5px;
+}
+
+.shop-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 65px 0 0 15px;
+}
+
+.shop-name {
+  border: 1px solid black;
+}
+
+.detailBusinessStatus {
+  margin-left: 30px;
+  color: #ad8ea1;
+  font-size: 12px;
+}
+
+.detailAddress {
+  width: 260px;
+  height: 38px;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.syokurepo {
+  width: 160px;
+  height: 24px;
+  border-radius: 50px;
+  background-color: #777777;
+  color: white;
+  font-size: 11px;
+  line-height: 24px;
+  margin-top: 70px;
+  margin-left: 15px;
+}
+
+.name-container {
+  width: 100px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 13px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  margin-left: 15px;
+}
+
+.text {
+  font-size: 11px;
+  width: 260px;
 }
 </style>

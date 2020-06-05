@@ -1,248 +1,292 @@
 <template>
   <div>
-    <p class="route-map">Route Map</p>
-    <div class="plan-map">
-      <Map></Map>
-    </div>
-    <div class="create-plan" v-on:click="open">デートプランの作成</div>
-    <div v-show="example">
-      <div class="plan-title">Title</div>
-      <div class="plan">
-        <div class="add-plan"></div>
-        <div class="time-schedule">
-          <div class="time">
-            <p>AM</p>
-            <p>PM</p>
-          </div>
-          <div class="content">Dating Plan</div>
-        </div>
+    <div v-show="outputState === 'list'" class="output">
+      <p class="route-map">Route Map</p>
+      <div class="plan-map">
+        <Map></Map>
       </div>
-    </div>
-    <div v-show="good">
-      <div class="plan-title">{{ plan.inputTitle1 }}</div>
-      <div class="plan">
-        <div class="add-plan"></div>
-        <div class="time-schedule">
-          <div class="times">
-            <p>{{ plan.items1 }}</p>
-            <div>
-              <div v-if="plan.items2 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items2 }}</p>
-              </div>
+      <div class="create-plan" v-on:click="open">デートプランの作成</div>
+      <div v-show="example">
+        <div class="plan-title">Title</div>
+        <div class="plan">
+          <div class="add-plan"></div>
+          <div class="time-schedule">
+            <div class="time">
+              <p>AM</p>
+              <p>PM</p>
             </div>
-            <div>
-              <div v-if="plan.items3 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items3 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items4 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items4 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items5 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items5 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items6 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items6 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items6 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items6 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items7 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items7 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items8 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items8 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items9 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items9 }}</p>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items10 === ''"></div>
-              <div v-else>
-                <p class="am">{{ plan.items10 }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="time-d">
-            <div>{{ plan.hours1 }}:{{ plan.minutes1 }}</div>
-            <div>
-              <div v-if="plan.items2 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours2 }}:{{ plan.minutes2 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items3 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours3 }}:{{ plan.minutes3 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items4 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours4 }}:{{ plan.minutes4 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items5 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours5 }}:{{ plan.minutes5 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items6 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours6 }}:{{ plan.minutes6 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items7 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours7 }}:{{ plan.minutes7 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items8 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours8 }}:{{ plan.minutes8 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items9 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours9 }}:{{ plan.minutes9 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items10 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.hours10 }}:{{ plan.minutes10 }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="contents">
-            <div>{{ plan.inputPlan1 }}</div>
-            <div>
-              <div v-if="plan.items2 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan2 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items3 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan3 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items4 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan4 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items5 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan5 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items6 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan6 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items7 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan7 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items8 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan8 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items9 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan9 }}</div>
-              </div>
-            </div>
-            <div>
-              <div v-if="plan.items10 === ''"></div>
-              <div v-else>
-                <div class="pm">{{ plan.inputPlan10 }}</div>
-              </div>
-            </div>
+            <div class="content">Dating Plan</div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="popUp" v-show="showContent">
-      <div id="create">
-        <div v-on:click="close" class="close">close</div>
-        <SubPages @complete="create"></SubPages>
+      <div v-show="good">
+        <div class="plan-title">{{ plan.inputTitle1 }}</div>
+        <div class="plan">
+          <div class="add-plan">
+            <div class="photo-spot">
+              <img :src="plan.spotPhoto" height="48" width="48" />
+            </div>
+          </div>
+          <div class="time-schedule">
+            <div class="times">
+              <p>{{ plan.items1 }}</p>
+              <div>
+                <div v-if="plan.items2 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items2 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items3 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items3 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items4 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items4 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items5 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items5 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items6 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items6 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items7 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items7 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items8 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items8 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items9 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items9 }}</p>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items10 === ''"></div>
+                <div v-else>
+                  <p class="am">{{ plan.items10 }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="time-d">
+              <div>{{ plan.hours1 }}:{{ plan.minutes1 }}</div>
+              <div>
+                <div v-if="plan.items2 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours2 }}:{{ plan.minutes2 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items3 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours3 }}:{{ plan.minutes3 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items4 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours4 }}:{{ plan.minutes4 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items5 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours5 }}:{{ plan.minutes5 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items6 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours6 }}:{{ plan.minutes6 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items7 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours7 }}:{{ plan.minutes7 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items8 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours8 }}:{{ plan.minutes8 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items9 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours9 }}:{{ plan.minutes9 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items10 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.hours10 }}:{{ plan.minutes10 }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="contents">
+              <div>{{ plan.inputPlan1 }}</div>
+              <div>
+                <div v-if="plan.items2 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan2 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items3 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan3 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items4 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan4 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items5 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan5 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items6 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan6 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items7 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan7 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items8 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan8 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items9 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan9 }}</div>
+                </div>
+              </div>
+              <div>
+                <div v-if="plan.items10 === ''"></div>
+                <div v-else>
+                  <div class="pm">{{ plan.inputPlan10 }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="choice-spots">
-      <div>
-        <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
+      <div id="popUp" v-show="showContent">
+        <div id="create">
+          <div v-on:click="close" class="close">close</div>
+          <SubPages @complete="create" :fav-photo="favSpotsInfo"></SubPages>
+        </div>
       </div>
-      <div class="fav-spots">
-        <v-col>
-          <v-row v-for="(favSpot, index) in favSpotsInfo" :key="index">
-            <!-- favSpotはスポットごとのplace_idです -->
-            <div @click="detail(index)">{{ favSpot }}</div>
+      <div class="choice-spots">
+        <div><v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots</div>
+        <div class="fav-spots">
+          <div
+            class="pho"
+            v-for="(favSpot, index) in favSpotsInfo"
+            :key="index"
+          >
+            <div>
+              <!-- favSpotはスポットごとのplace_idです -->
 
-            <img :src="detailPhoto" width="340" />
-            <div>{{ detailName }}</div>
-            <div>{{ detailRating }}</div>
-            <div>{{ detailBusinessStatus }}</div>
-            <div>{{ detailAddress }}</div>
-            <div v-for="(review, index) in detailReviews" :key="index">
-              {{ review.author_name }}
-              {{ review.rating }}
-              {{ review.text }}
-              <br />
+              <div class="photofav">
+                <img
+                  @click="detail(index)"
+                  class="photo"
+                  height="100"
+                  width="100"
+                  :src="favSpot.photoURl"
+                />
+              </div>
+              <!-- <div>
+                <p class="choice-spots">
+                  <v-icon>mdi-bookmark-multiple-outline</v-icon>recommended
+                  Spots
+                </p>
+                <div class="spots"></div>
+              </div> -->
             </div>
-            <div>
-              <a :href="detailUrl"></a>
-            </div>
-          </v-row>
+          </div>
+        </div>
+      </div>
+      <div class="price">
+        <div class="price-name">合計の予算を入力する</div>
+        <v-col class="d-flex" cols="8" md="2">
+          <v-select
+            :items="price"
+            dense
+            v-model="price1"
+            class="select"
+          ></v-select
+          >〜
+          <v-select
+            :items="price"
+            dense
+            v-model="price2"
+            class="select"
+          ></v-select>
         </v-col>
       </div>
+      <div class="submit">
+        <router-link
+          :to="{
+            name: 'ShowPlan',
+            params: {
+              value: this.plan,
+              price1: this.price1,
+              price2: this.price2
+            }
+          }"
+          ><span>投稿</span></router-link
+        >
+      </div>
     </div>
-
-    <div>
-      <p class="choice-spots">
-        <v-icon>mdi-bookmark</v-icon>recommended Spots
-      </p>
-      <div class="spots"></div>
+    <div v-show="outputState === 'detail'" class="output">
+      <img :src="detailPhoto" width="340" />
+      <div>{{ detailName }}</div>
+      <div>{{ detailRating }}</div>
+      <div>{{ detailBusinessStatus }}</div>
+      <div>{{ detailAddress }}</div>
+      <div v-for="(review, index) in detailReviews" :key="index">
+        {{ review.author_name }}
+        {{ review.rating }}
+        {{ review.text }}
+        <br />
+      </div>
+      <div>
+        <a :href="detailUrl"></a>
+      </div>
+      <v-btn @click="showList">検索結果に戻る</v-btn>
     </div>
   </div>
 </template>
@@ -265,6 +309,7 @@ export default {
     return {
       pageState: "create",
       showContent: false,
+      outputState: "list",
       example: true,
       good: false,
       detailName: "",
@@ -274,7 +319,25 @@ export default {
       detailAddress: "",
       detailReviews: [],
       detailUrl: "",
-      plan: ""
+      plan: "",
+      price1: "",
+      price2: "",
+      price: [
+        "0",
+        "1000",
+        "2000",
+        "3000",
+        "4000",
+        "5000",
+        "6000",
+        "7000",
+        "8000",
+        "9000",
+        "10000",
+        "15000",
+        "20000",
+        "20000以上"
+      ]
     };
   },
   methods: {
@@ -290,12 +353,17 @@ export default {
     close: function() {
       this.showContent = false;
     },
+    showList() {
+      this.outputState = "list";
+    },
     detail(index) {
+      this.outputState = "detail";
+
       let vm = this;
       const service = new google.maps.places.PlacesService(map);
       service.getDetails(
         {
-          placeId: vm.favSpotsInfo,
+          placeId: vm.favSpotsInfo[index].place_id,
           fields: [
             "name",
             "photos",
@@ -308,7 +376,6 @@ export default {
         },
         function(result, status) {
           if (status == google.maps.places.PlacesServiceStatus.OK) {
-            console.log(result.name);
             vm.detailName = result.name;
             vm.detailPhoto = result.photos[0].getUrl();
             vm.detailRating = result.rating;
@@ -338,11 +405,7 @@ export default {
       this.good = true;
     }
   },
-  props: {
-    favSpotsInfo: {
-      type: Array
-    }
-  }
+  props: ["favSpotsInfo"]
 };
 </script>
 
@@ -359,7 +422,7 @@ export default {
   width: 48px;
   height: 48px;
   text-align: center;
-  padding-top: 10px;
+
   margin-top: 56px;
   margin-left: 30px;
   margin-right: 31px;
@@ -393,13 +456,13 @@ export default {
   border: #707070;
   background-color: #434343;
   border-radius: 7px;
-  width: 97px;
+  width: 150px;
   height: 20px;
   text-align: center;
   color: #ffffff;
   font-size: 13px;
   padding-top: 2px;
-  margin-left: 185px;
+  margin-left: 165px;
 }
 .plan {
   display: flex;
@@ -428,11 +491,13 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 1600px;
+  /* height: 2400px; */
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 #create {
   z-index: 2;
@@ -448,20 +513,25 @@ export default {
   margin-bottom: 9px;
   color: #3b3b3b;
   margin-top: 50px;
-  margin-left: 35px;
+  margin-left: 15px;
 }
 .spots {
   border: 0.3px solid #707070;
-  width: 300px;
-  height: 200px;
+  width: 330px;
+  height: 220px;
   margin-bottom: 40px;
-  margin-left: 35px;
+  margin-left: 15px;
 }
 .fav-spots {
   border: 0.3px solid #707070;
-  width: 300px;
-  height: 200px;
+  width: 340px;
+  height: 220px;
   margin: 9px 35px 40px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 .times {
   font-size: 13px;
@@ -495,5 +565,25 @@ export default {
 }
 .am {
   margin-top: 50px;
+}
+.photofav {
+  height: 100px;
+  width: 100px;
+  margin: 3px 5px 0 5px;
+}
+
+.pho {
+  height: 100px;
+}
+.price-name {
+  font-size: 10px;
+  background-color: #d9b2ca;
+  height: 23px;
+  width: 149px;
+  text-align: center;
+  padding-top: 5px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  margin-left: 33px;
 }
 </style>

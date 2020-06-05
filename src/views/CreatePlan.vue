@@ -2,17 +2,30 @@
   <div class="content">
     <!-- 編集・スポット画面切替バー -->
     <div class="switch-page">
-      <div @click="showEdit" class="switch" :class="pageState === 'edit' ? 'darken-color' : ''">編集</div>
+      <div
+        @click="showEdit"
+        class="switch"
+        :class="pageState === 'edit' ? 'darken-color' : ''"
+      >
+        編集
+      </div>
       <div
         @click="showSearch"
         class="switch"
         :class="pageState === 'search' ? 'darken-color' : ''"
-      >スポット検索</div>
+      >
+        スポット検索
+      </div>
     </div>
-    <div :class="pageState === 'edit' ? 'underline-left' : 'underline-right'"></div>
+    <div
+      :class="pageState === 'edit' ? 'underline-left' : 'underline-right'"
+    ></div>
     <!-- 編集画面＆スポット検索 -->
     <Edit v-show="pageState === 'edit'" :favSpotsInfo="favSpots"></Edit>
-    <FindPlace v-show="pageState === 'search'" @addFavSpots="addFavSpots"></FindPlace>
+    <FindPlace
+      v-show="pageState === 'search'"
+      @addFavSpots="addFavSpots"
+    ></FindPlace>
   </div>
 </template>
 
