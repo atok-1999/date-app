@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header></Header>
     <p class="route-map">Route Map</p>
     <div class="plan-map">
       <Map></Map>
@@ -11,13 +10,11 @@
 
 <script>
 import Map from "@/components/CreatePlan/Map.vue";
-import Header from "@/components/Header.vue";
 import DetailPlan from "@/components/DetailPlan.vue";
 export default {
   components: {
     DetailPlan,
-    Map,
-    Header
+    Map
   }
 };
 </script>

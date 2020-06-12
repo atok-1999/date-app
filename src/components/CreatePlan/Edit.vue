@@ -23,7 +23,13 @@
         <div class="planTitle">
           <p class="planContent">Ⅰ タイトルを入力する</p>
           <v-col cols="8" sm="6">
-            <v-text-field class="text-field" label="Title" outlined dense v-model="inputTitle1"></v-text-field>
+            <v-text-field
+              class="text-field"
+              label="Title"
+              outlined
+              dense
+              v-model="inputTitle1"
+            ></v-text-field>
           </v-col>
         </div>
         <div class="plans">
@@ -36,7 +42,7 @@
               </div>
               <div class="time-schedule">
                 <div class="times">
-                  <p>{{ spot.items1 }}</p>
+                  <p class="am-pm">{{ spot.items1 }}</p>
                 </div>
                 <div class="border"></div>
                 <div class="time-d">
@@ -53,15 +59,21 @@
       <div id="popUp" v-show="showContent">
         <div id="create">
           <div v-on:click="close" class="close">close</div>
-          <SubPages :fav-photo="favSpotsInfo" :spots.sync="spots" :create="create"></SubPages>
+          <SubPages
+            :fav-photo="favSpotsInfo"
+            :spots.sync="spots"
+            :create="create"
+          ></SubPages>
         </div>
       </div>
       <div class="choice-spots">
-        <div>
-          <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
-        </div>
+        <div><v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots</div>
         <div class="fav-spots">
-          <div class="pho" v-for="(favSpot, index) in favSpotsInfo" :key="index">
+          <div
+            class="pho"
+            v-for="(favSpot, index) in favSpotsInfo"
+            :key="index"
+          >
             <div>
               <!-- favSpotはスポットごとのplace_idです -->
 
@@ -88,9 +100,19 @@
       <div class="price" v-show="good">
         <div class="price-name">合計の予算を入力する</div>
         <v-col class="d-flex" cols="8" md="2">
-          <v-select :items="price" dense v-model="price1" class="select"></v-select>
+          <v-select
+            :items="price"
+            dense
+            v-model="price1"
+            class="select"
+          ></v-select>
           <span class="nyoro">〜</span>
-          <v-select :items="price" dense v-model="price2" class="select"></v-select>
+          <v-select
+            :items="price"
+            dense
+            v-model="price2"
+            class="select"
+          ></v-select>
         </v-col>
       </div>
       <div class="submit" v-show="good">
@@ -318,10 +340,11 @@ export default {
   color: #ffffff;
   font-size: 13px;
   padding-top: 2px;
-  margin-left: 165px;
+  margin-left: 120px;
 }
 .plan {
   display: flex;
+  margin-left: 20px;
 }
 .time {
   font-size: 13px;
@@ -338,7 +361,7 @@ export default {
 .content {
   font-size: 13px;
   margin-left: 70px;
-  margin-top: 55px;
+  margin-top: 75px;
   color: #696969;
 }
 #popUp {
@@ -391,7 +414,7 @@ export default {
 }
 .times {
   font-size: 13px;
-  margin-top: 50px;
+  margin-top: 35px;
   padding-top: 20px;
   padding-right: 15px;
   height: 90%;
@@ -399,6 +422,9 @@ export default {
   border-right: 0.5px solid #696969;
   display: flex;
   flex-direction: column;
+}
+.am-pm {
+  padding-top: 17px;
 }
 .time-d {
   font-size: 13px;
@@ -449,6 +475,7 @@ export default {
   padding-top: 5px;
   color: #ffffff;
   margin-bottom: 10px;
+  margin-left: 15px;
 }
 .return {
   display: flex;
@@ -528,7 +555,7 @@ export default {
   height: 39px;
   background-color: #d9b2ca;
   border-radius: 50px;
-  margin: 126px 95px 114px 95px;
+  margin: 126px 95px 91px 95px;
   text-align: center;
   padding-top: 7px;
 }
@@ -542,7 +569,7 @@ export default {
   padding-top: 3px;
   padding-left: 10px;
   text-align: left;
-  margin: 25px 0 10px 0;
+  margin: 25px 0 10px 15px;
   height: 21px;
   width: 124px;
   font-size: 9px;
@@ -553,6 +580,8 @@ export default {
 }
 .plan-content {
   display: flex;
+  margin-left: 20px;
+  height: 20%;
 }
 .plans {
   display: flex;

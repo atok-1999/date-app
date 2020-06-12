@@ -3,20 +3,22 @@
     <div class="plan-title">{{ plan.title }}</div>
     <div class="plan">
       <div v-for="(spot, index) in plan.spots" :key="index">
-        <div class="add-plan">
-          <div class="photo-spot">
-            <img :src="spot.spotPhoto" height="48" width="48" />
+        <div class="spots">
+          <div class="add-plan">
+            <div class="photo-spot">
+              <img :src="spot.spotPhoto" height="48" width="48" />
+            </div>
           </div>
-        </div>
-        <div class="time-schedule">
-          <div class="times">
-            <p>{{ spot.items1 }}</p>
-          </div>
-          <div class="time-d">
-            <div>{{ spot.hours1 }}:{{ spot.minutes1 }}</div>
-          </div>
-          <div class="contents">
-            <div>{{ spot.inputPlan1 }}</div>
+          <div class="time-schedule">
+            <div class="times">
+              <p class="am-pm">{{ spot.items1 }}</p>
+            </div>
+            <div class="time-d">
+              <div>{{ spot.hours1 }}:{{ spot.minutes1 }}</div>
+            </div>
+            <div class="contents">
+              <div>{{ spot.inputPlan1 }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -62,13 +64,16 @@ export default {
   color: #ffffff;
   font-size: 13px;
   padding-top: 2px;
-  margin-left: 165px;
+  margin-left: 120px;
 }
 .plan {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 20px;
+}
+.spots {
+  display: flex;
 }
 .add-plan {
   border: 1px solid #707070;
@@ -82,7 +87,7 @@ export default {
 }
 .times {
   font-size: 13px;
-  margin-top: 50px;
+  margin-top: 35px;
   padding-top: 20px;
   padding-right: 15px;
   height: 90%;
@@ -90,6 +95,9 @@ export default {
   border-right: 0.5px solid #696969;
   display: flex;
   flex-direction: column;
+}
+.am-pm {
+  padding-top: 17px;
 }
 .time-schedule {
   display: flex;
@@ -122,7 +130,8 @@ export default {
 }
 .date {
   margin-top: 90px;
-  margin-left: 40px;
+  margin-left: 50px;
+  margin-bottom: 95px;
 }
 .money {
   padding-left: 20px;
