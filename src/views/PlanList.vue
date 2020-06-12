@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="page-title mb-5">New Plans</div>
+  <div class="content">
+    <div class="new-plans mb-5">New Plans</div>
     <span class="new ml-5">New !</span>
     <v-row class="mx-2" v-for="(plan, index) in plans" :key="index">
       <v-col cols="5">
@@ -30,16 +30,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pate-title {
-  cursor: pointer;
+.content {
+  min-height: 100vh;
+}
+
+.new-plans {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
   background-color: #efeded;
   padding: 6px 0;
-  color: #a8a8a8;
+  color: #333;
   font-size: 14px;
+  border-bottom: 2px solid #d9b2ca;
 }
 
 .new {
