@@ -50,7 +50,7 @@
           <v-card>
             <v-card-text>
               <div class="dialog-text">
-                <div>あなたは既にログインしています。</div>
+                <div>ログインしました。</div>
               </div>
             </v-card-text>
             <v-card-actions>
