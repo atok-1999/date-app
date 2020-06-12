@@ -1,20 +1,14 @@
 <template>
   <div>
-    <p class="route-map">Route Map</p>
-    <div class="plan-map">
-      <Map></Map>
-    </div>
     <DetailPlan></DetailPlan>
   </div>
 </template>
 
 <script>
-import Map from "@/components/CreatePlan/Map.vue";
 import DetailPlan from "@/components/DetailPlan.vue";
 export default {
   components: {
-    DetailPlan,
-    Map
+    DetailPlan
   }
 };
 </script>

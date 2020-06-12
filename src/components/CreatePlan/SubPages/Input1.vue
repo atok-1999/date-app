@@ -1,10 +1,21 @@
 <template>
   <div v-on:input="submit">
     <div v-show="outputState === 'list'" class="output">
+      <p class="content">Ⅰ スポット名を入力</p>
+      <v-col cols="12" sm="6">
+        <v-textarea
+          label="Spot"
+          auto-grow
+          outlined
+          rows="2"
+          row-height="15"
+          v-model="spotName"
+        ></v-textarea>
+      </v-col>
       <p class="content">Ⅱ 写真を追加する</p>
       <div class="photo" @click="choiceSpotPhoto">
-        <div v-show="plus" class="plus">+</div>
-        <div v-show="photoChoice" class="choice-photos">
+        <div v-if="!spotPhoto.length" class="plus">+</div>
+        <div v-else class="choice-photos">
           <img
             :src="spotPhoto"
             height="100"
@@ -67,11 +78,22 @@
                 width="85"
                 :src="photo.photoURl"
               />
-              <v-checkbox
-                v-model="choicePhotos"
+              <v-btn
+                class="check-btn"
+                fab
+                dark
+                x-small
+                @click="sendToPlanPhoto(index)"
                 v-show="button"
-                :value="photoFav[index].photoURl"
-              ></v-checkbox>
+                :color="
+                  choicePhotos.some(
+                    spot => spot.place_id === photoFav[index].place_id
+                  )
+                    ? '#E9546B'
+                    : '#F5F5F5'
+                "
+                ><v-icon>mdi-star</v-icon></v-btn
+              >
             </div>
           </div>
         </div>
@@ -123,6 +145,7 @@
 export default {
   data: function() {
     return {
+      spotName: "",
       items: ["AM", "PM"],
       hours: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
       minutes: ["00", "10", "20", "30", "40", "50"],
@@ -139,20 +162,22 @@ export default {
       detailReviews: [],
       detailUrl: "",
       button: false,
-      spotPhoto: null,
+      spotPhoto: [],
       choicePhotos: [],
       plus: true,
-      photoChoice: false
+      placeId: ""
     };
   },
   methods: {
     submit: function() {
       this.$emit("update", {
+        spotName: this.spotName,
         inputPlan1: this.inputPlan1,
         items1: this.items1,
         hours1: this.hours1,
         minutes1: this.minutes1,
-        spotPhoto: this.spotPhoto
+        spotPhoto: this.spotPhoto,
+        placeId: this.placeId
       });
     },
     showList() {
@@ -203,12 +228,17 @@ export default {
     choiceSpotPhoto() {
       this.button = true;
     },
+    sendToPlanPhoto(index) {
+      this.choicePhotos.push({
+        place_id: this.photoFav[index].place_id,
+        photoURl: this.photoFav[index].photoURl
+      });
+    },
     setPhoto(index) {
-      this.plus = false;
-      this.photoChoice = true;
-      this.spotPhoto = this.choicePhotos[0];
+      this.spotPhoto = this.choicePhotos[0].photoURl;
+      this.placeId = this.choicePhotos[0].place_id;
       this.choicePhotos.splice(index, 1);
-      // this.button = false;
+      this.button = false;
     }
   },
   props: {
@@ -218,11 +248,13 @@ export default {
   watch: {
     isNextPage() {
       if (this.isNextPage === true) {
+        this.spotName = "";
         this.inputPlan1 = "";
         this.items1 = "";
         this.hours1 = "";
         this.minutes1 = "";
-        this.spotPhoto = null;
+        this.spotPhoto = [];
+        this.placeId = "";
 
         this.$emit("nextCleard");
       }
@@ -286,6 +318,9 @@ export default {
 }
 .middle {
   margin-top: 20px;
+}
+.photofav {
+  position: relative;
 }
 .photos {
   margin: 3px 5px 0 5px;
@@ -368,5 +403,10 @@ export default {
 .text {
   font-size: 11px;
   width: 260px;
+}
+.check-btn {
+  position: absolute;
+  top: 3%;
+  right: 2%;
 }
 </style>

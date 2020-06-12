@@ -35,11 +35,13 @@ export default {
     return {
       stepNumber: 1,
       plan: {
-        spotPhoto: null,
+        spotName: "",
+        spotPhoto: [],
         inputPlan1: "",
         items1: "",
         hours1: "",
-        minutes1: ""
+        minutes1: "",
+        placeId: ""
       },
       isNext: false
     };
@@ -52,11 +54,13 @@ export default {
       this.stepNumber++;
       this.spots.push(this.plan);
       this.plan = {
-        spotPhoto: null,
+        spotName: "",
+        spotPhoto: [],
         inputPlan1: "",
         items1: "",
         hours1: "",
-        minutes1: ""
+        minutes1: "",
+        placeId: ""
       };
       console.log(this.spots);
 
