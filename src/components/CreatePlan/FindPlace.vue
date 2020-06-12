@@ -59,13 +59,13 @@
       </div>
       <div class="detailAddress">{{ detailAddress }}</div>
       <div class="shokurepo-container">
-        <div class="syokurepo">みんなの食レポ</div>
+        <div class="syokurepo">みんなの口コミ</div>
       </div>
       <div v-for="(review, index) in detailReviews" :key="index">
         <div class="text-container">
           <div class="name-container">
             <div class="name">{{ review.author_name }}</div>
-            <div class="rate">{{ review.rating }}</div>
+            <div class="rate">評価：{{ review.rating }} / 5</div>
           </div>
           <div class="text">{{ review.text }}</div>
         </div>

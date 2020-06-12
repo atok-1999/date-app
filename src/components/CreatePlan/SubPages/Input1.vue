@@ -1,21 +1,16 @@
 <template>
   <div v-on:input="submit">
     <div v-show="outputState === 'list'" class="output">
-      <p class="content">Ⅰ タイトルを入力する</p>
-      <v-col cols="12" sm="6">
-        <v-text-field
-          class="text-field"
-          label="Title"
-          outlined
-          dense
-          v-model="inputTitle1"
-        ></v-text-field>
-      </v-col>
       <p class="content">Ⅱ 写真を追加する</p>
       <div class="photo" @click="choiceSpotPhoto">
         <div v-show="plus" class="plus">+</div>
         <div v-show="photoChoice" class="choice-photos">
-          <img :src="spotPhoto" height="100" width="100" />
+          <img
+            :src="spotPhoto"
+            height="100"
+            width="100"
+            @click="detail(index)"
+          />
         </div>
       </div>
       <p class="content">Ⅲ 時間を入力</p>
@@ -90,20 +85,31 @@
     </div>
     <div v-show="outputState === 'detail'" class="output">
       <img :src="detailPhoto" width="300" />
-      <div>{{ detailName }}</div>
-      <div>{{ detailRating }}</div>
-      <div>{{ detailBusinessStatus }}</div>
-      <div>{{ detailAddress }}</div>
+      <div class="return">
+        <i class="fas fa-undo-alt"></i>
+        <span>画像一覧に戻る</span>
+      </div>
+      <div class="shop-container">
+        <div class="shop-name">{{ detailName }}</div>
+        <div class="detailBusinessStatus">{{ detailBusinessStatus }}</div>
+      </div>
+      <div class="detailAddress">{{ detailAddress }}</div>
+      <div class="shokurepo-container">
+        <div class="syokurepo">みんなの口コミ</div>
+      </div>
       <div v-for="(review, index) in detailReviews" :key="index">
-        {{ review.author_name }}
-        {{ review.rating }}
-        {{ review.text }}
-        <br />
+        <div class="text-container">
+          <div class="name-container">
+            <div class="name">{{ review.author_name }}</div>
+            <div class="rate">評価：{{ review.rating }} / 5</div>
+          </div>
+          <div class="text">{{ review.text }}</div>
+        </div>
       </div>
       <div>
         <a :href="detailUrl"></a>
       </div>
-      <v-btn @click="showList">プラン作成に戻る</v-btn>
+      <v-btn @click="showList">検索結果に戻る</v-btn>
     </div>
   </div>
 </template>
@@ -120,7 +126,6 @@ export default {
       items: ["AM", "PM"],
       hours: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
       minutes: ["00", "10", "20", "30", "40", "50"],
-      inputTitle1: "",
       inputPlan1: "",
       items1: "",
       hours1: "",
@@ -143,7 +148,6 @@ export default {
   methods: {
     submit: function() {
       this.$emit("update", {
-        inputTitle1: this.inputTitle1,
         inputPlan1: this.inputPlan1,
         items1: this.items1,
         hours1: this.hours1,
@@ -203,9 +207,27 @@ export default {
       this.plus = false;
       this.photoChoice = true;
       this.spotPhoto = this.choicePhotos[0];
+      this.choicePhotos.splice(index, 1);
+      // this.button = false;
     }
   },
-  props: ["photoFav"]
+  props: {
+    photoFav: Array,
+    isNextPage: Boolean
+  },
+  watch: {
+    isNextPage() {
+      if (this.isNextPage === true) {
+        this.inputPlan1 = "";
+        this.items1 = "";
+        this.hours1 = "";
+        this.minutes1 = "";
+        this.spotPhoto = null;
+
+        this.$emit("nextCleard");
+      }
+    }
+  }
 };
 </script>
 
@@ -273,5 +295,78 @@ export default {
 }
 .choice-photos {
   padding-top: 8px;
+}
+.return {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 15px;
+  font-size: 10px;
+}
+
+.fa-undo-alt {
+  font-size: 10px;
+  padding-top: 3px;
+  margin-right: 5px;
+}
+
+.shop-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 65px 0 0 15px;
+}
+
+.shop-name {
+  border: 1px solid black;
+}
+
+.detailBusinessStatus {
+  margin-left: 30px;
+  color: #ad8ea1;
+  font-size: 12px;
+}
+
+.detailAddress {
+  width: 260px;
+  height: 38px;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.syokurepo {
+  width: 160px;
+  height: 24px;
+  border-radius: 50px;
+  background-color: #777777;
+  color: white;
+  font-size: 11px;
+  line-height: 24px;
+  margin-top: 70px;
+  margin-left: 15px;
+}
+
+.name-container {
+  width: 100px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 13px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  margin-left: 15px;
+}
+
+.text {
+  font-size: 11px;
+  width: 260px;
 }
 </style>

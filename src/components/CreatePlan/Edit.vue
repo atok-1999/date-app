@@ -20,182 +20,30 @@
         </div>
       </div>
       <div v-show="good">
-        <div class="plan-title">{{ plan.inputTitle1 }}</div>
-        <div class="plan">
-          <div class="add-plan">
-            <div class="photo-spot">
-              <img :src="plan.spotPhoto" height="48" width="48" />
-            </div>
-          </div>
-          <div class="time-schedule">
-            <div class="times">
-              <p>{{ plan.items1 }}</p>
-              <div>
-                <div v-if="plan.items2 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items2 }}</p>
+        <div class="planTitle">
+          <p class="planContent">Ⅰ タイトルを入力する</p>
+          <v-col cols="8" sm="6">
+            <v-text-field class="text-field" label="Title" outlined dense v-model="inputTitle1"></v-text-field>
+          </v-col>
+        </div>
+        <div class="plans">
+          <div v-for="(spot, index) in spots" :key="index">
+            <div class="plan-content">
+              <div class="add-plan">
+                <div class="photo-spot">
+                  <img :src="spot.spotPhoto" height="48" width="48" />
                 </div>
               </div>
-              <div>
-                <div v-if="plan.items3 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items3 }}</p>
+              <div class="time-schedule">
+                <div class="times">
+                  <p>{{ spot.items1 }}</p>
                 </div>
-              </div>
-              <div>
-                <div v-if="plan.items4 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items4 }}</p>
+                <div class="border"></div>
+                <div class="time-d">
+                  <div>{{ spot.hours1 }}:{{ spot.minutes1 }}</div>
                 </div>
-              </div>
-              <div>
-                <div v-if="plan.items5 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items5 }}</p>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items6 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items6 }}</p>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items7 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items7 }}</p>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items8 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items8 }}</p>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items9 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items9 }}</p>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items10 === ''"></div>
-                <div v-else>
-                  <p class="am">{{ plan.items10 }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="time-d">
-              <div>{{ plan.hours1 }}:{{ plan.minutes1 }}</div>
-              <div>
-                <div v-if="plan.items2 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours2 }}:{{ plan.minutes2 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items3 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours3 }}:{{ plan.minutes3 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items4 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours4 }}:{{ plan.minutes4 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items5 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours5 }}:{{ plan.minutes5 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items6 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours6 }}:{{ plan.minutes6 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items7 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours7 }}:{{ plan.minutes7 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items8 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours8 }}:{{ plan.minutes8 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items9 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours9 }}:{{ plan.minutes9 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items10 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.hours10 }}:{{ plan.minutes10 }}</div>
-                </div>
-              </div>
-            </div>
-            <div class="contents">
-              <div>{{ plan.inputPlan1 }}</div>
-              <div>
-                <div v-if="plan.items2 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan2 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items3 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan3 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items4 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan4 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items5 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan5 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items6 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan6 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items7 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan7 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items8 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan8 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items9 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan9 }}</div>
-                </div>
-              </div>
-              <div>
-                <div v-if="plan.items10 === ''"></div>
-                <div v-else>
-                  <div class="pm">{{ plan.inputPlan10 }}</div>
+                <div class="contents">
+                  <div>{{ spot.inputPlan1 }}</div>
                 </div>
               </div>
             </div>
@@ -205,17 +53,15 @@
       <div id="popUp" v-show="showContent">
         <div id="create">
           <div v-on:click="close" class="close">close</div>
-          <SubPages @complete="create" :fav-photo="favSpotsInfo"></SubPages>
+          <SubPages :fav-photo="favSpotsInfo" :spots.sync="spots" :create="create"></SubPages>
         </div>
       </div>
       <div class="choice-spots">
-        <div><v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots</div>
+        <div>
+          <v-icon>mdi-bookmark-multiple-outline</v-icon>Favorite Spots
+        </div>
         <div class="fav-spots">
-          <div
-            class="pho"
-            v-for="(favSpot, index) in favSpotsInfo"
-            :key="index"
-          >
+          <div class="pho" v-for="(favSpot, index) in favSpotsInfo" :key="index">
             <div>
               <!-- favSpotはスポットごとのplace_idです -->
 
@@ -234,54 +80,45 @@
                   Spots
                 </p>
                 <div class="spots"></div>
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
       </div>
-      <div class="price">
+      <div class="price" v-show="good">
         <div class="price-name">合計の予算を入力する</div>
         <v-col class="d-flex" cols="8" md="2">
-          <v-select
-            :items="price"
-            dense
-            v-model="price1"
-            class="select"
-          ></v-select
-          >〜
-          <v-select
-            :items="price"
-            dense
-            v-model="price2"
-            class="select"
-          ></v-select>
+          <v-select :items="price" dense v-model="price1" class="select"></v-select>
+          <span class="nyoro">〜</span>
+          <v-select :items="price" dense v-model="price2" class="select"></v-select>
         </v-col>
       </div>
-      <div class="submit">
-        <router-link
-          :to="{
-            name: 'ShowPlan',
-            params: {
-              value: this.plan,
-              price1: this.price1,
-              price2: this.price2
-            }
-          }"
-          ><span>投稿</span></router-link
-        >
+      <div class="submit" v-show="good">
+        <span class="link" @click="post">投稿</span>
       </div>
     </div>
     <div v-show="outputState === 'detail'" class="output">
       <img :src="detailPhoto" width="340" />
-      <div>{{ detailName }}</div>
-      <div>{{ detailRating }}</div>
-      <div>{{ detailBusinessStatus }}</div>
-      <div>{{ detailAddress }}</div>
+      <div class="return">
+        <i class="fas fa-undo-alt"></i>
+        <span>画像一覧に戻る</span>
+      </div>
+      <div class="shop-container">
+        <div class="shop-name">{{ detailName }}</div>
+        <div class="detailBusinessStatus">{{ detailBusinessStatus }}</div>
+      </div>
+      <div class="detailAddress">{{ detailAddress }}</div>
+      <div class="shokurepo-container">
+        <div class="syokurepo">みんなの口コミ</div>
+      </div>
       <div v-for="(review, index) in detailReviews" :key="index">
-        {{ review.author_name }}
-        {{ review.rating }}
-        {{ review.text }}
-        <br />
+        <div class="text-container">
+          <div class="name-container">
+            <div class="name">{{ review.author_name }}</div>
+            <div class="rate">評価：{{ review.rating }} / 5</div>
+          </div>
+          <div class="text">{{ review.text }}</div>
+        </div>
       </div>
       <div>
         <a :href="detailUrl"></a>
@@ -307,6 +144,8 @@ export default {
   },
   data() {
     return {
+      spots: [],
+      plans: [],
       pageState: "create",
       showContent: false,
       outputState: "list",
@@ -319,7 +158,7 @@ export default {
       detailAddress: "",
       detailReviews: [],
       detailUrl: "",
-      plan: "",
+      inputTitle1: "",
       price1: "",
       price2: "",
       price: [
@@ -398,11 +237,28 @@ export default {
         this.detailBusinessStatus = "閉店";
       }
     },
-    create: function(plan) {
-      this.plan = plan;
+    create: function() {
       this.showContent = false;
       this.example = false;
       this.good = true;
+    },
+    post: function() {
+      this.plans.push();
+      console.log(this.plans);
+      const plan = {
+        spots: this.spots,
+        title: this.inputTitle1,
+        priceFrom: this.price1,
+        priceTo: this.price2
+      };
+      this.$store.dispatch("addPlan", plan).then(plan => {
+        this.$router.push({
+          name: "ShowPlan",
+          params: {
+            planId: plan.id
+          }
+        });
+      });
     }
   },
   props: ["favSpotsInfo"]
@@ -473,8 +329,8 @@ export default {
   padding-right: 10px;
   padding-top: 40px;
   height: 150px;
-  color: #696969;
   border-right: 0.5px solid #696969;
+  color: #696969;
 }
 .time-schedule {
   display: flex;
@@ -546,8 +402,8 @@ export default {
 }
 .time-d {
   font-size: 13px;
-  margin-left: 20px;
   margin-top: 70px;
+  margin-left: 20px;
   color: #696969;
   display: flex;
   flex-direction: column;
@@ -575,6 +431,15 @@ export default {
 .pho {
   height: 100px;
 }
+.nyoro {
+  margin: 10px;
+}
+.select {
+  margin: 0;
+}
+.price {
+  margin-left: 33px;
+}
 .price-name {
   font-size: 10px;
   background-color: #d9b2ca;
@@ -584,6 +449,113 @@ export default {
   padding-top: 5px;
   color: #ffffff;
   margin-bottom: 10px;
+}
+.return {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 15px;
+  font-size: 10px;
+}
+
+.fa-undo-alt {
+  font-size: 10px;
+  padding-top: 3px;
+  margin-right: 5px;
+}
+
+.shop-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 65px 0 0 15px;
+}
+
+.shop-name {
+  border: 1px solid black;
+}
+
+.detailBusinessStatus {
+  margin-left: 30px;
+  color: #ad8ea1;
+  font-size: 12px;
+}
+
+.detailAddress {
+  width: 260px;
+  height: 38px;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.syokurepo {
+  width: 160px;
+  height: 24px;
+  border-radius: 50px;
+  background-color: #777777;
+  color: white;
+  font-size: 11px;
+  line-height: 24px;
+  margin-top: 70px;
+  margin-left: 15px;
+}
+
+.name-container {
+  width: 100px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 13px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  margin-left: 15px;
+}
+
+.text {
+  font-size: 11px;
+  width: 260px;
+}
+.submit {
+  width: 185px;
+  height: 39px;
+  background-color: #d9b2ca;
+  border-radius: 50px;
+  margin: 126px 95px 114px 95px;
+  text-align: center;
+  padding-top: 7px;
+}
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 15px;
+}
+.planContent {
+  background-color: #d9b2ca;
+  padding-top: 3px;
+  padding-left: 10px;
+  text-align: left;
+  margin: 25px 0 10px 0;
+  height: 21px;
+  width: 124px;
+  font-size: 9px;
+  color: #ffffff;
+}
+.planTitle {
   margin-left: 33px;
+}
+.plan-content {
+  display: flex;
+}
+.plans {
+  display: flex;
+  flex-direction: column;
 }
 </style>

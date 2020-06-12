@@ -1,216 +1,46 @@
 <template>
-  <div>
-    <div class="plan-title">{{ detailPlan.value.inputTitle1 }}</div>
+  <div v-if="dataReady">
+    <div class="plan-title">{{ plan.title }}</div>
     <div class="plan">
-      <div class="add-plan">
-        <div class="photo-spot">
-          <img :src="detailPlan.value.spotPhoto" height="48" width="48" />
-        </div>
-      </div>
-      <div class="time-schedule">
-        <div class="times">
-          <p>{{ detailPlan.value.items1 }}</p>
-          <div>
-            <div v-if="detailPlan.value.items2 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items2 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items3 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items3 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items4 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items4 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items5 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items5 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items6 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items6 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items7 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items7 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items8 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items8 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items9 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items9 }}</p>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items10 === ''"></div>
-            <div v-else>
-              <p class="am">{{ detailPlan.value.items10 }}</p>
-            </div>
+      <div v-for="(spot, index) in plan.spots" :key="index">
+        <div class="add-plan">
+          <div class="photo-spot">
+            <img :src="spot.spotPhoto" height="48" width="48" />
           </div>
         </div>
-        <div class="time-d">
-          <div>
-            {{ detailPlan.value.hours1 }}:{{ detailPlan.value.minutes1 }}
+        <div class="time-schedule">
+          <div class="times">
+            <p>{{ spot.items1 }}</p>
           </div>
-          <div>
-            <div v-if="detailPlan.value.items2 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours2 }}:{{ detailPlan.value.minutes2 }}
-              </div>
-            </div>
+          <div class="time-d">
+            <div>{{ spot.hours1 }}:{{ spot.minutes1 }}</div>
           </div>
-          <div>
-            <div v-if="detailPlan.value.items3 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours3 }}:{{ detailPlan.value.minutes3 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items4 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours4 }}:{{ detailPlan.value.minutes4 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items5 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours5 }}:{{ detailPlan.value.minutes5 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items6 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours6 }}:{{ detailPlan.value.minutes6 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items7 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours7 }}:{{ detailPlan.value.minutes7 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items8 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours8 }}:{{ detailPlan.value.minutes8 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items9 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours9 }}:{{ detailPlan.value.minutes9 }}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items10 === ''"></div>
-            <div v-else>
-              <div class="pm">
-                {{ detailPlan.value.hours10 }}:{{ detailPlan.value.minutes10 }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="contents">
-          <div>{{ detailPlan.value.inputPlan1 }}</div>
-          <div>
-            <div v-if="detailPlan.value.items2 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan2 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items3 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan3 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items4 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan4 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items5 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan5 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items6 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan6 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items7 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan7 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items8 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan8 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items9 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan9 }}</div>
-            </div>
-          </div>
-          <div>
-            <div v-if="detailPlan.value.items10 === ''"></div>
-            <div v-else>
-              <div class="pm">{{ detailPlan.value.inputPlan10 }}</div>
-            </div>
+          <div class="contents">
+            <div>{{ spot.inputPlan1 }}</div>
           </div>
         </div>
       </div>
     </div>
     <div class="date">
       <div class="date-price">このデートプランの予算</div>
-      <div class="money">¥{{ detailPlan.price1 }}〜{{ detailPlan.price2 }}</div>
+      <div class="money">¥{{ plan.priceFrom }}〜{{ plan.priceTo }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["detailPlan"]
+  data() {
+    return {
+      plan: null,
+      dataReady: false
+    };
+  },
+  async mounted() {
+    const planId = this.$route.params.planId;
+    this.plan = await this.$store.dispatch("fetchPlan", planId);
+    this.dataReady = true;
+  }
 };
 </script>
 
@@ -236,6 +66,9 @@ export default {
 }
 .plan {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
 }
 .add-plan {
   border: 1px solid #707070;
