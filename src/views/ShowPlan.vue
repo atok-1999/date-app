@@ -5,7 +5,7 @@
     <div class="plan-map">
       <Map></Map>
     </div>
-    <DetailPlan :detail-plan="$route.params"></DetailPlan>
+    <DetailPlan></DetailPlan>
   </div>
 </template>
 

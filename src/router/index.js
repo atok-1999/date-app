@@ -7,6 +7,7 @@ import LoginWithEmail from "@/views/LoginWithEmail.vue";
 import CreatePlan from "@/views/CreatePlan.vue";
 import MyPage from "@/views/MyPage.vue";
 import ShowPlan from "@/views/ShowPlan.vue";
+import PlanList from "@/views/PlanList.vue";
 
 Vue.use(VueRouter);
 
@@ -14,7 +15,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/about",
@@ -23,44 +24,49 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
     path: "/login-or-signup",
     name: "LoginOrSignup",
-    component: LoginOrSignup
+    component: LoginOrSignup,
   },
   {
     path: "/signup-with-email",
     name: "SignupWithEmail",
-    component: SignupWithEmail
+    component: SignupWithEmail,
   },
   {
     path: "/login-with-email",
     name: "LoginWithEmail",
-    component: LoginWithEmail
+    component: LoginWithEmail,
   },
   {
     path: "/create-plan",
     name: "CreatePlan",
-    component: CreatePlan
+    component: CreatePlan,
   },
   {
     path: "/my-page",
     name: "MyPage",
-    component: MyPage
+    component: MyPage,
   },
   {
-    path: "/show-plan",
+    path: "/show-plan/:planId",
     name: "ShowPlan",
-    component: ShowPlan
-  }
+    component: ShowPlan,
+  },
+  {
+    path: "/plan-list",
+    name: "PlanList",
+    component: PlanList,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

@@ -3,67 +3,12 @@
     <div>
       <p class="number">Plan{{ stepNumber }}</p>
       <Input1SubPage
-        v-show="stepNumber === 1"
         @update="updatePlan"
         :photo-fav="favPhoto"
+        :is-next-page="isNext"
+        @nextCleard="nextCleard"
       >
       </Input1SubPage>
-      <Input2SubPage
-        v-show="stepNumber === 2"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input2SubPage>
-
-      <Input3SubPage
-        v-show="stepNumber === 3"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input3SubPage>
-
-      <Input4SubPage
-        v-show="stepNumber === 4"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input4SubPage>
-      <Input5SubPage
-        v-show="stepNumber === 5"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input5SubPage>
-      <Input6SubPage
-        v-show="stepNumber === 6"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input6SubPage>
-      <Input7SubPage
-        v-show="stepNumber === 7"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input7SubPage>
-      <Input8SubPage
-        v-show="stepNumber === 8"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input8SubPage>
-      <Input9SubPage
-        v-show="stepNumber === 9"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input9SubPage>
-      <Input10SubPage
-        v-show="stepNumber === 10"
-        @update="updatePlan"
-        :photo-fav="favPhoto"
-      >
-      </Input10SubPage>
 
       <div v-show="stepNumber === 1" class="page-1">
         <div @click="nextStep" class="page">Next</div>
@@ -81,76 +26,22 @@
 
 <script>
 import Input1SubPage from "@/components/CreatePlan/SubPages/Input1.vue";
-import Input2SubPage from "@/components/CreatePlan/SubPages/Input2.vue";
-import Input3SubPage from "@/components/CreatePlan/SubPages/Input3.vue";
-import Input4SubPage from "@/components/CreatePlan/SubPages/Input4.vue";
-import Input5SubPage from "@/components/CreatePlan/SubPages/Input5.vue";
-import Input6SubPage from "@/components/CreatePlan/SubPages/Input6.vue";
-import Input7SubPage from "@/components/CreatePlan/SubPages/Input7.vue";
-import Input8SubPage from "@/components/CreatePlan/SubPages/Input8.vue";
-import Input9SubPage from "@/components/CreatePlan/SubPages/Input9.vue";
-import Input10SubPage from "@/components/CreatePlan/SubPages/Input10.vue";
 
 export default {
   components: {
-    Input1SubPage,
-    Input2SubPage,
-    Input3SubPage,
-    Input4SubPage,
-    Input5SubPage,
-    Input6SubPage,
-    Input7SubPage,
-    Input8SubPage,
-    Input9SubPage,
-    Input10SubPage
+    Input1SubPage
   },
   data: function() {
     return {
       stepNumber: 1,
       plan: {
         spotPhoto: null,
-        inputTitle1: "",
         inputPlan1: "",
         items1: "",
         hours1: "",
-        minutes1: "",
-        inputPlan2: "",
-        items2: "",
-        hours2: "",
-        minutes2: "",
-        inputPlan3: "",
-        items3: "",
-        hours3: "",
-        minutes3: "",
-        inputPlan4: "",
-        items4: "",
-        hours4: "",
-        minutes4: "",
-        inputPlan5: "",
-        items5: "",
-        hours5: "",
-        minutes5: "",
-        inputPlan6: "",
-        items6: "",
-        hours6: "",
-        minutes6: "",
-        inputPlan7: "",
-        items7: "",
-        hours7: "",
-        minutes7: "",
-        inputPlan8: "",
-        items8: "",
-        hours8: "",
-        minutes8: "",
-        inputPlan9: "",
-        items9: "",
-        hours9: "",
-        minutes9: "",
-        inputPlan10: "",
-        items10: "",
-        hours10: "",
-        minutes10: ""
-      }
+        minutes1: ""
+      },
+      isNext: false
     };
   },
   methods: {
@@ -159,15 +50,35 @@ export default {
     },
     nextStep: function() {
       this.stepNumber++;
+      this.spots.push(this.plan);
+      this.plan = {
+        spotPhoto: null,
+        inputPlan1: "",
+        items1: "",
+        hours1: "",
+        minutes1: ""
+      };
+      console.log(this.spots);
+
+      this.isNext = true;
     },
     updatePlan: function(planData) {
-      Object.assign(this.plan, planData);
+      this.plan = Object.assign(this.plan, planData);
     },
     createdPlan: function() {
-      this.$emit("complete", this.plan);
+      this.spots.push(this.plan);
+      this.$emit("update:spots", this.spots);
+      this.create();
+    },
+    nextCleard() {
+      this.isNext = false;
     }
   },
-  props: ["favPhoto"]
+  props: {
+    favPhoto: Array,
+    spots: Array,
+    create: Function
+  }
 };
 </script>
 
