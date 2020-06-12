@@ -49,6 +49,9 @@
                   <div>{{ spot.hours1 }}:{{ spot.minutes1 }}</div>
                 </div>
                 <div class="contents">
+                  <div>
+                    {{ spot.spotName }}
+                  </div>
                   <div>{{ spot.inputPlan1 }}</div>
                 </div>
               </div>
@@ -76,7 +79,6 @@
           >
             <div>
               <!-- favSpotはスポットごとのplace_idです -->
-
               <div class="photofav">
                 <img
                   @click="detail(index)"
@@ -437,7 +439,7 @@ export default {
 .contents {
   font-size: 13px;
   margin-left: 40px;
-  margin-top: 69px;
+  margin-top: 60px;
   color: #696969;
   display: flex;
   flex-direction: column;
