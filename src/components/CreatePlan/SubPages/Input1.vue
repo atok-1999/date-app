@@ -5,52 +5,25 @@
       <div class="photo" @click="choiceSpotPhoto">
         <div v-show="plus" class="plus">+</div>
         <div v-show="photoChoice" class="choice-photos">
-          <img
-            :src="spotPhoto"
-            height="100"
-            width="100"
-            @click="detail(index)"
-          />
+          <img :src="spotPhoto" height="100" width="100" @click="detail(index)" />
         </div>
       </div>
       <p class="content">Ⅲ 時間を入力</p>
       <div class="time">
         <v-col class="d-flex" cols="4" md="2">
-          <v-select
-            :items="items"
-            label="AM/PM"
-            dense
-            v-model="items1"
-          ></v-select>
+          <v-select :items="items" label="AM/PM" dense v-model="items1"></v-select>
         </v-col>
         <v-col class="d-flex" cols="4" md="2">
-          <v-select
-            :items="hours"
-            label="hours"
-            dense
-            v-model="hours1"
-          ></v-select>
+          <v-select :items="hours" label="hours" dense v-model="hours1"></v-select>
         </v-col>
         <p class="middle">:</p>
         <v-col class="d-flex" cols="4" md="2">
-          <v-select
-            :items="minutes"
-            label="minutes"
-            dense
-            v-model="minutes1"
-          ></v-select>
+          <v-select :items="minutes" label="minutes" dense v-model="minutes1"></v-select>
         </v-col>
       </div>
       <p class="content">Ⅳ プランを入力</p>
       <v-col cols="12" sm="6">
-        <v-textarea
-          label="Plan"
-          auto-grow
-          outlined
-          rows="2"
-          row-height="15"
-          v-model="inputPlan1"
-        ></v-textarea>
+        <v-textarea label="Plan" auto-grow outlined rows="2" row-height="15" v-model="inputPlan1"></v-textarea>
       </v-col>
       <div>
         <p class="choiceSpots">
@@ -67,11 +40,7 @@
                 width="85"
                 :src="photo.photoURl"
               />
-              <v-checkbox
-                v-model="choicePhotos"
-                v-show="button"
-                :value="photoFav[index].photoURl"
-              ></v-checkbox>
+              <v-checkbox v-model="choicePhotos" v-show="button" :value="photoFav[index].photoURl"></v-checkbox>
             </div>
           </div>
         </div>
