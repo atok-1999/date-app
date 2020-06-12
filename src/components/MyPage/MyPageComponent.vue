@@ -3,7 +3,8 @@
     <h1>Mypage</h1>
     <div class="user-photo">
       <v-avatar color="#E0E0E0" size="70">
-        <v-icon dark large>mdi-account</v-icon>
+        <img v-if="userName !== 'ゲスト'" :src="profileImage" />
+        <v-icon v-else dark large>mdi-account</v-icon>
       </v-avatar>
     </div>
     <div class="user-info">こんにちは、{{ userName }}さん</div>
@@ -30,14 +31,23 @@ import firebase from "firebase";
 export default {
   data() {
     return {
-      userName: ""
+      userName: "",
+      profileImage: ""
     };
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         this.userName = user.email;
+
+        let docRef = firebase
+          .firestore()
+          .collection("users")
+          .doc(user.uid);
+
+        docRef.get().then(doc => {
+          this.profileImage = doc.data().profileImageUrl;
+        });
       } else {
         this.userName = "ゲスト";
       }

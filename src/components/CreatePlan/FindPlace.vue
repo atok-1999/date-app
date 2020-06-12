@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <div class="text-field-container">
       <v-text-field
         class="text-field"
@@ -198,6 +198,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.content {
+  min-height: 100vh;
+}
+
 .text-field-container {
   max-width: 300px;
   display: flex;

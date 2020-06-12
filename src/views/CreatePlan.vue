@@ -1,8 +1,5 @@
 <template>
   <div class="content">
-    <div class="header-component">
-      <Header></Header>
-    </div>
     <!-- 編集・スポット画面切替バー -->
     <div class="switch-page">
       <div
@@ -35,13 +32,11 @@
 <script>
 import Edit from "@/components/CreatePlan/Edit.vue";
 import FindPlace from "@/components/CreatePlan/FindPlace.vue";
-import Header from "@/components/Header.vue";
 
 export default {
   components: {
     FindPlace,
-    Edit,
-    Header
+    Edit
   },
   data() {
     return {
