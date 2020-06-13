@@ -1,29 +1,37 @@
 <template>
   <div class="content">
-    <div v-show="list">
-      <div class="new-plans mb-5">New Plans</div>
-      <span class="new ml-5">New !</span>
+    <div>
+      <div class="new-plans mb-5">新着のデートプラン</div>
+      <span class="new ml-5">New Plans!</span>
       <v-row class="mx-2" v-for="(plan, index) in plans" :key="index">
-        <div class="plan-spot" @click="detailPlan">
-          <v-col cols="5">
-            <img :src="plan.spots[0].spotPhoto" width="130" height="100" />
-          </v-col>
-          <v-col cols="7">
-            <div class="plan-title">{{ plan.title }}</div>
-            <div class="price">¥: {{ plan.priceFrom }}-{{ plan.priceTo }}</div>
-            <div class="spots">
-              <div class="spot-name">
-                <i class="fas fa-tag">このプランに含まれるスポット例</i>
-              </div>
-              {{ plan.spots[0].spotName }}
+        <v-col class="photo-container" cols="5">
+          <img :src="plan.spots[0].spotPhoto" width="130" height="115" />
+        </v-col>
+        <v-col cols="7">
+          <div class="plan-title">{{ plan.title }}</div>
+          <div class="price">
+            <i class="fas fa-yen-sign"></i>
+            {{ plan.priceFrom }}-{{ plan.priceTo }}
+          </div>
+          <div class="spots">
+            <div class="spot-name">
+              <i class="fas fa-tag">このプランに含まれるスポット</i>
             </div>
-          </v-col>
-          <v-divider class="mx-4" style="display: inline;"></v-divider>
-        </div>
+            <ul>
+              <li>{{ plan.spots[0].spotName }}</li>
+              <li>{{ plan.spots[1] ? plan.spots[1].spotName : "" }} etc.</li>
+            </ul>
+          </div>
+          <v-row class="user-photo-container align-center">
+            made by
+            <v-avatar class="ml-2" color="#E0E0E0" size="35">
+              <img v-if="plan.userPhoto" :src="plan.userPhoto" />
+              <v-icon v-else dark>mdi-account</v-icon>
+            </v-avatar>
+          </v-row>
+        </v-col>
+        <v-divider class="mx-4" style="display: inline;"></v-divider>
       </v-row>
-    </div>
-    <div v-show="showPlan">
-      <v-btn @click="planList">新着プランに戻る</v-btn>
     </div>
   </div>
 </template>
@@ -36,31 +44,18 @@ export default {
     }
   },
   data() {
-    return {
-      list: true,
-      showPlan: false
-    };
+    return {};
   },
   mounted() {
     this.$store.dispatch("loadPlans");
   },
-  methods: {
-    detailPlan() {
-      this.list = false;
-      this.showPlan = true;
-    },
-    planList() {
-      this.list = true;
-      this.showPlan = false;
-    }
-  }
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
 .content {
   min-height: 100vh;
-  background-color: #eeeeee5d;
 }
 
 .new-plans {
@@ -89,21 +84,28 @@ export default {
   margin: 5px;
 }
 .price {
-  font-size: 6px;
+  font-size: 12px;
   text-align: right;
   padding-left: 40px;
-  margin-bottom: 5px;
 }
 .spots {
-  background-color: #ffffff;
-  height: 56px;
+  height: 80px;
   padding: 10px;
   font-size: 12px;
 }
-.plan-spot {
-  display: flex;
-}
+
 .spot-name {
   font-size: 2px;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo-container {
+  margin-left: 75px;
+  font-size: 14px;
 }
 </style>
