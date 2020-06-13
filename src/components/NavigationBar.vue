@@ -31,7 +31,7 @@ export default {
       }, 1000);
     },
     searchClicked() {
-      this.$router.push("/");
+      this.$router.push("/plan-list");
     },
     heartClicked() {
       this.heart = "mdi-heart";

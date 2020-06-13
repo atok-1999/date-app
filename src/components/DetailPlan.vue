@@ -68,7 +68,7 @@
         <a :href="detailUrl"></a>
       </div>
       <div class="back">
-        <v-btn @click="showList">検索結果に戻る</v-btn>
+        <v-btn @click="showList">プラン詳細に戻る</v-btn>
       </div>
     </div>
   </div>
