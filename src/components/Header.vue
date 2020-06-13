@@ -2,11 +2,7 @@
   <div id="app">
     <header class="header">
       <div class="header__menu">
-        <div
-          class="header__menu__line"
-          @click="naviOpen"
-          :class="{ 'is-active': active }"
-        >
+        <div class="header__menu__line" @click="naviOpen" :class="{ 'is-active': active }">
           <span :class="{ white: active }"></span>
           <span :class="{ white: active }"></span>
           <span :class="{ white: active }"></span>
@@ -32,12 +28,7 @@
           </div>
         </div>
         <div class="login">
-          <router-link
-            v-if="!islogeedIn"
-            to="/login-or-signup"
-            style="color: black;"
-            >会員登録 / ログインする</router-link
-          >
+          <router-link v-if="!islogeedIn" to="/login-or-signup" style="color: black;">会員登録 / ログインする</router-link>
           <div v-else @click="logout">ログアウトする</div>
         </div>
         <div class="back-2">
@@ -87,8 +78,6 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.userName = user.email;
-
         this.islogeedIn = true;
 
         let docRef = firebase
@@ -98,6 +87,7 @@ export default {
 
         docRef.get().then(doc => {
           this.profileImage = doc.data().profileImageUrl;
+          this.userName = doc.data().userInfo.userName;
         });
       } else {
         this.userName = "ゲスト";
