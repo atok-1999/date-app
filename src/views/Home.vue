@@ -16,7 +16,7 @@
         </router-link>
       </div>
       <div class="circle">
-        <router-link to="/" style="text-decoration: none;">
+        <router-link to="/plan-list" style="text-decoration: none;">
           <div class="circle-menu">
             <i class="fas fa-search"></i>
             <span>Search</span>
