@@ -114,7 +114,7 @@ export default new Vuex.Store({
   getters: {
     sortedPlans(state) {
       return state.plans.sort((lhs, rhs) => {
-        return lhs.createdAt - rhs.createdAt;
+        return rhs.createdAt - lhs.createdAt;
       });
     }
   }

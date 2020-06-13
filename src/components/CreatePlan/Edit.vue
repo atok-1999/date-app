@@ -50,7 +50,7 @@
                 </div>
                 <div class="contents">
                   <div>
-                    {{ spot.spotName }}
+                    <i class="fas fa-map-marker-alt"> {{ spot.spotName }}</i>
                   </div>
                   <div>{{ spot.inputPlan1 }}</div>
                 </div>
@@ -346,7 +346,6 @@ export default {
 }
 .plan {
   display: flex;
-  margin-left: 20px;
 }
 .time {
   font-size: 13px;
