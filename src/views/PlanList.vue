@@ -4,7 +4,7 @@
       <div class="new-plans mb-5">新着のデートプラン</div>
       <span class="new ml-5">New Plans!</span>
       <v-row class="mx-2" v-for="(plan, index) in plans" :key="index">
-        <v-col class="photo-container" cols="5">
+        <v-col @click="showDetail(index)" class="photo-container" cols="5">
           <img :src="plan.spots[0].spotPhoto" width="130" height="115" />
         </v-col>
         <v-col cols="7">
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   computed: {
     plans() {
@@ -49,7 +51,32 @@ export default {
   mounted() {
     this.$store.dispatch("loadPlans");
   },
-  methods: {}
+  methods: {
+    showDetail(index) {
+      const id = this.plans[index].id;
+
+      this.$store.commit("setUserPhotoPostedPlan", this.plans[index].userPhoto);
+
+      let docRef = firebase
+        .firestore()
+        .collection("users")
+        .doc(this.plans[index].uid);
+
+      docRef.get().then(doc => {
+        this.$store.commit(
+          "setUserNamePostedPlan",
+          doc.data().userInfo.userName
+        );
+      });
+
+      this.$router.push({
+        name: "ShowPlan",
+        params: {
+          planId: id
+        }
+      });
+    }
+  }
 };
 </script>
 
