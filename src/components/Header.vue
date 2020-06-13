@@ -51,7 +51,7 @@
       </div>
     </transition>
     <div class="create-header">
-      <h2>Dating Plan</h2>
+      <h2>Tulip</h2>
     </div>
   </div>
 </template>
@@ -82,7 +82,7 @@ export default {
   &__menu {
     width: 60px;
     height: 60px;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     z-index: 10;
@@ -152,6 +152,10 @@ export default {
   width: 300px;
   display: flex;
   justify-content: space-between;
+}
+
+h2 {
+  margin-left: 30px;
 }
 
 .menu-bar {

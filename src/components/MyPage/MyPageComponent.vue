@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Mypage</h1>
+    <div class="Mypage">My page</div>
     <div class="user-photo">
       <v-avatar color="#E0E0E0" size="70">
         <v-icon dark large>mdi-account</v-icon>
@@ -17,9 +17,7 @@
       <div class="option">
         <v-icon class="icon">mdi-heart</v-icon>いいねしたデートプラン
       </div>
-      <div class="option">
-        <v-icon class="icon">mdi-cog</v-icon>設定
-      </div>
+      <div class="option"><v-icon class="icon">mdi-cog</v-icon>設定</div>
     </div>
   </div>
 </template>
@@ -47,6 +45,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.Mypage {
+  width: 100%;
+  height: 46px;
+  margin-top: 15px;
+  background-color: #F4F4F4;
+  font-size: 15px;
+  text-align: center;
+  line-height: 46px;
+  color: #000000;
+}
+
 .options {
   margin-top: 10px;
 }

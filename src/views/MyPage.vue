@@ -1,16 +1,18 @@
 <template>
   <div>
-    <div class="page-title">マイページ</div>
+    <Header></Header>
     <MyPageComponent></MyPageComponent>
   </div>
 </template>
 
 <script>
 import MyPageComponent from "@/components/MyPage/MyPageComponent.vue";
+import Header from "@/components/Header.vue";
 
 export default {
   components: {
-    MyPageComponent
+    MyPageComponent,
+    Header
   }
 };
 </script>
