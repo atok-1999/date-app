@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   computed: {
     plans() {
@@ -52,6 +54,21 @@ export default {
   methods: {
     showDetail(index) {
       const id = this.plans[index].id;
+
+      this.$store.commit("setUserPhotoPostedPlan", this.plans[index].userPhoto);
+
+      let docRef = firebase
+        .firestore()
+        .collection("users")
+        .doc(this.plans[index].uid);
+
+      docRef.get().then(doc => {
+        this.$store.commit(
+          "setUserNamePostedPlan",
+          doc.data().userInfo.userName
+        );
+      });
+
       this.$router.push({
         name: "ShowPlan",
         params: {
