@@ -1,6 +1,5 @@
 <template>
-  <div class="content">
-    <div class="page-title">マイページ</div>
+  <div>
     <MyPageComponent></MyPageComponent>
   </div>
 </template>
