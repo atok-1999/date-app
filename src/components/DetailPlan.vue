@@ -29,7 +29,9 @@
                 </div>
               </div>
               <div class="contents">
-                <div>{{ spot.spotName }}</div>
+                <div>
+                  <i class="fas fa-map-marker-alt">{{ spot.spotName }}</i>
+                </div>
                 <div>{{ spot.inputPlan1 }}</div>
               </div>
             </div>
@@ -178,7 +180,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px;
 }
 .spots {
   display: flex;
