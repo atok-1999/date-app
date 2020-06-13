@@ -38,8 +38,6 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.userName = user.email;
-
         let docRef = firebase
           .firestore()
           .collection("users")
@@ -47,6 +45,7 @@ export default {
 
         docRef.get().then(doc => {
           this.profileImage = doc.data().profileImageUrl;
+          this.userName = doc.data().userInfo.userName;
         });
       } else {
         this.userName = "ゲスト";
