@@ -2,11 +2,7 @@
   <div id="app">
     <header class="header">
       <div class="header__menu">
-        <div
-          class="header__menu__line"
-          @click="naviOpen"
-          :class="{ 'is-active': active }"
-        >
+        <div class="header__menu__line" @click="naviOpen" :class="{ 'is-active': active }">
           <span :class="{ white: active }"></span>
           <span :class="{ white: active }"></span>
           <span :class="{ white: active }"></span>
@@ -19,34 +15,35 @@
     <transition name="right">
       <div class="back" v-show="active">
         <div class="ami">
-          <div class="icon"><i class="fas fa-user-circle"></i></div>
+          <v-avatar color="#E0E0E0" size="70">
+            <img v-if="userName !== 'ゲスト'" :src="profileImage" />
+            <v-icon v-else dark large>mdi-account</v-icon>
+          </v-avatar>
           <div class="hitoshi">
             <span class="ai">こんにちは</span>
-            <div class="au">ゲスト<span class="ai">さん</span></div>
+            <div class="au">
+              {{ userName }}
+              <span class="ai">さん</span>
+            </div>
           </div>
         </div>
         <div class="login">
-          <router-link to="/login-or-signup" style="color: black;"
-            >会員登録 / ログインする</router-link
-          >
+          <router-link v-if="!islogeedIn" to="/login-or-signup" style="color: black;">会員登録 / ログインする</router-link>
+          <div v-else @click="logout">ログアウトする</div>
         </div>
         <div class="back-2">
-          <router-link to="/"
-            ><i class="fas fa-home"></i
-            ><span class="aa">Home</span></router-link
-          >
-          <router-link to="/about"
-            ><i class="fas fa-heart"></i
-            ><span class="aa">Favorite</span></router-link
-          >
-          <router-link to="#"
-            ><i class="fas fa-bookmark"></i
-            ><span class="aa">ChoicePhoto</span></router-link
-          >
-          <router-link to="#"
-            ><i class="fas fa-search"></i
-            ><span class="aa">Search</span></router-link
-          >
+          <router-link to="/">
+            <i class="fas fa-home"></i>
+            <span class="aa">Home</span>
+          </router-link>
+          <router-link to="/my-page">
+            <i class="fas fa-bookmark"></i>
+            <span class="aa">MyPage</span>
+          </router-link>
+          <router-link to="#">
+            <i class="fas fa-search"></i>
+            <span class="aa">Search</span>
+          </router-link>
         </div>
       </div>
     </transition>
@@ -57,24 +54,51 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 /* eslint-disable */
 export default {
-  data: function(){
+  data: function() {
     return {
       active: false,
-      navi: false
+      navi: false,
+      userName: "",
+      profileImage: "",
+      islogeedIn: false
     };
   },
   methods: {
     naviOpen: function() {
       this.active = !this.active;
+    },
+    logout() {
+      firebase.auth().signOut();
     }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.userName = user.email;
+
+        this.islogeedIn = true;
+
+        let docRef = firebase
+          .firestore()
+          .collection("users")
+          .doc(user.uid);
+
+        docRef.get().then(doc => {
+          this.profileImage = doc.data().profileImageUrl;
+        });
+      } else {
+        this.userName = "ゲスト";
+      }
+    });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-
 .header {
   width: 100%;
   background: #fff;
@@ -90,7 +114,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 35px 33.5px 0 0; 
+    margin: 35px 33.5px 0 0;
     &__line {
       width: 36px;
       height: 30px;
@@ -104,7 +128,7 @@ export default {
         height: 2px;
         background: #000;
         display: block;
-        transition: .6s;
+        transition: 0.6s;
         position: absolute;
         &:first-child {
           top: 0;
@@ -118,7 +142,7 @@ export default {
       }
       &.is-active {
         span {
-          transition: .6s;
+          transition: 0.6s;
           &:first-child {
             transform: rotate(45deg);
             top: 50%;
@@ -136,12 +160,14 @@ export default {
   }
 }
 
-.right-enter-active, .right-leave-active {
+.right-enter-active,
+.right-leave-active {
   transform: translate(0px, 0px);
   transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
 
-.right-enter, .right-leave-to {
+.right-enter,
+.right-leave-to {
   transform: translateX(100vw) translateX(0px);
 }
 
@@ -157,7 +183,6 @@ export default {
 .menu-bar {
   width: 35px;
   height: 33.5px;
-
 }
 
 .long {
@@ -171,7 +196,7 @@ export default {
 }
 
 .back {
-  background-color: #000000A8;
+  background-color: #000000a8;
   height: 100vh;
   width: 85%;
   position: absolute;
@@ -191,7 +216,7 @@ export default {
 }
 
 .white {
-    background-color: white;
+  background-color: white;
 }
 
 .white-color {
@@ -254,7 +279,7 @@ export default {
   flex-direction: row;
   color: white;
   align-items: flex-start;
-  padding-right: 95px;
+  margin-bottom: 10px;
 }
 
 .hitoshi {
@@ -262,6 +287,4 @@ export default {
   margin-left: 15px;
   margin-bottom: 35px;
 }
-
-
 </style>

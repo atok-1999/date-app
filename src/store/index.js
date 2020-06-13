@@ -17,6 +17,8 @@ export default new Vuex.Store({
       //   ]
       // }
     ],
+    userId: "",
+    userPhoto: "",
   },
   mutations: {
     setPlans(state, plans) {
@@ -24,6 +26,12 @@ export default new Vuex.Store({
     },
     addPlan(state, plan) {
       state.plans.push(plan);
+    },
+    setUserId(state, uid) {
+      state.userId = uid;
+    },
+    setUserPhoto(state, photoUrl) {
+      state.userPhoto = photoUrl;
     },
   },
   actions: {
@@ -80,38 +88,21 @@ export default new Vuex.Store({
         //   });
       }
     },
-    async addPlan({ commit }, plan) {
+    async addPlan({ commit, state }, plan) {
       // firestore に保存する
       // おわったら
       // store に保存する（＝ mutation を commit する）
+
       const res = await firebase
         .firestore()
         .collection("plans")
         .add({
           ...plan,
           createdAt: new Date(),
-          uid: firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-              return user.uid;
-            } else {
-              return null;
-            }
-          }),
-          userPhoto: firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-              let docRef = firebase
-                .firestore()
-                .collection("users")
-                .doc(user.uid);
-
-              docRef.get().then((doc) => {
-                return doc.data().profileImageUrl;
-              });
-            } else {
-              return null;
-            }
-          }),
+          uid: state.userId,
+          userPhoto: state.userPhoto,
         });
+
       const planPosted = {
         id: res.id,
         ...plan,
@@ -123,7 +114,7 @@ export default new Vuex.Store({
   getters: {
     sortedPlans(state) {
       return state.plans.sort((lhs, rhs) => {
-        return rhs.createdAt - lhs.createdAt;
+        return lhs.createdAt - rhs.createdAt;
       });
     },
   },
