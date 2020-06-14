@@ -1,10 +1,14 @@
 <template>
-  <v-app>
-    <Header></Header>
-    <router-view></router-view>
-    <Footer></Footer>
-    <NavigationBar></NavigationBar>
-  </v-app>
+  <div class="back-color">
+    <div class="screen">
+      <v-app>
+        <Header></Header>
+        <router-view></router-view>
+        <Footer></Footer>
+        <NavigationBar></NavigationBar>
+      </v-app>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -32,4 +36,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.screen {
+  width: 375px;
+  filter: drop-shadow(0px 0px 10px #696969);
+  margin-left: 35%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+.back-color {
+  background-color: #f3f3f2;
+}
+</style>
