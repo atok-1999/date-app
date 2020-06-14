@@ -1,25 +1,21 @@
 <template>
   <div class="content">
     <div>
-      <div class="new-plans mb-5">新着のデートプラン</div>
-      <span class="new ml-5">New Plans!</span>
+      <div class="new-plans mb-5">いいねしたデートプラン</div>
+      <v-row>
+        <v-btn @click="$emit('return')" class="ml-5 mb-5" depressed>
+          <v-icon>mdi-undo-variant</v-icon>マイページに戻る
+        </v-btn>
+      </v-row>
+      <span class="new ml-5">Favorite Plans!</span>
       <v-row class="mx-2" v-for="(plan, index) in plans" :key="index">
         <v-col class="photo-container" cols="5">
-          <img @click="showDetail(index)" :src="plan.spots[0].spotPhoto" width="130" height="115" />
-          <v-btn
-            @click="sendToFavPlans(index)"
-            class="check-btn"
-            fab
-            dark
-            x-small
-            :color="
-              favPlans.some(spot => spot === plans[index].id)
-                ? 'pink'
-                : '#F5F5F5'
-            "
-          >
-            <v-icon>mdi-heart</v-icon>
-          </v-btn>
+          <img
+            @click="showDetail(index)"
+            :src="plan.spots[0].spotPhoto"
+            width="130"
+            height="115"
+          />
         </v-col>
         <v-col cols="7">
           <div class="plan-title">{{ plan.title }}</div>
@@ -54,18 +50,44 @@
 import firebase from "firebase";
 
 export default {
-  computed: {
-    plans() {
-      return this.$store.getters.sortedPlans;
-    }
-  },
   data() {
     return {
-      favPlans: []
+      userFavPlansID: [],
+      plans: [],
+      userId: ""
     };
+  },
+  watch: {
+    userId() {
+      const docRef = firebase
+        .firestore()
+        .collection("users")
+        .doc(this.userId);
+
+      docRef.get().then(snapshot => {
+        this.userFavPlansID = snapshot.data().favPlans;
+      });
+    },
+    userFavPlansID() {
+      this.$nextTick(() => {
+        const userFavPlansID = this.userFavPlansID;
+
+        const userFavPlans = this.$store.getters.sortedPlans.map(plan => {
+          if (userFavPlansID.some(id => id === plan.id)) {
+            return plan;
+          }
+        });
+        this.plans = userFavPlans.filter(plan => {
+          return plan !== undefined;
+        });
+      });
+    }
   },
   mounted() {
     this.$store.dispatch("loadPlans");
+  },
+  async created() {
+    this.userId = await this.$store.state.userId;
   },
   methods: {
     showDetail(index) {
@@ -91,24 +113,6 @@ export default {
           planId: id
         }
       });
-    },
-    sendToFavPlans(index) {
-      this.favPlans.push(this.plans[index].id);
-    }
-  },
-  watch: {
-    favPlans() {
-      if (this.$store.state.userId) {
-        let favPlans = this.favPlans;
-
-        let userRef = firebase
-          .firestore()
-          .collection("users")
-          .doc(this.$store.state.userId);
-        userRef.update({
-          favPlans: favPlans
-        });
-      }
     }
   }
 };
