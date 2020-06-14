@@ -37,14 +37,21 @@ export default {
 </script>
 
 <style>
-.screen {
-  width: 375px;
-  filter: drop-shadow(0px 0px 10px #696969);
-  margin-left: 35%;
-  padding-top: 2%;
-  padding-bottom: 2%;
+@media screen and (min-width: 481px) {
+  .screen {
+    width: 375px;
+    filter: drop-shadow(0px 0px 10px #696969);
+    margin-left: 35%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+  .back-color {
+    background-color: #f3f3f2;
+  }
 }
-.back-color {
-  background-color: #f3f3f2;
+@media screen and (max-width: 480px) {
+  .screen {
+    width: 375px;
+  }
 }
 </style>
