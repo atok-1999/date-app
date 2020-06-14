@@ -57,7 +57,7 @@
       </div>
     </transition>
     <div class="create-header">
-      <h2>Tulip</h2>
+      <h2>Dating Plan</h2>
     </div>
   </div>
 </template>

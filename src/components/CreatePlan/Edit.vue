@@ -367,7 +367,7 @@ export default {
   color: #696969;
 }
 #popUp {
-  z-index: 1;
+  z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
@@ -381,7 +381,7 @@ export default {
   padding-bottom: 30px;
 }
 #create {
-  z-index: 2;
+  z-index: 5;
   width: 90%;
   padding: 1em;
   background: #fff;
