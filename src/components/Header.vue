@@ -57,7 +57,9 @@
       </div>
     </transition>
     <div class="create-header">
-      <h2>Dating Plan</h2>
+      <div class="photo-container">
+        <img src="@/assets/header-component/Tulip.png" class="img" />
+      </div>
     </div>
   </div>
 </template>
@@ -296,4 +298,11 @@ export default {
   margin-left: 15px;
   margin-bottom: 35px;
 }
+
+.img {
+  display: inline-block;
+  height: 35px;
+  margin-left: 15px;
+}
+
 </style>
