@@ -51,7 +51,7 @@ export default {
 }
 @media screen and (max-width: 480px) {
   .screen {
-    width: 375px;
+    width: 100%;
   }
 }
 </style>
