@@ -22,10 +22,10 @@
             <span>Search</span>
           </div>
         </router-link>
-        <router-link to="/" style="text-decoration: none;">
+        <router-link to="/my-page" style="text-decoration: none;">
           <div class="circle-menu">
             <i class="fas fa-heart"></i>
-            <span>Favorite</span>
+            <span>My Page</span>
           </div>
         </router-link>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="page-title">メールアドレスでログインする</div>
     <div class="content">
       <div class="box">
@@ -107,6 +107,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  min-height: 100vh;
+}
+
 .content {
   display: flex;
   flex-direction: column;

@@ -1,50 +1,52 @@
 <template>
   <div>
-    <div class="Mypage">My page</div>
-    <div class="photo-container">
-      <div class="user-photo">
-        <v-avatar color="#E0E0E0" size="40">
-          <img v-if="userName !== 'ゲスト'" :src="profileImage" />
-          <v-icon v-else dark large>mdi-account</v-icon>
-        </v-avatar>
-        <div class="user-info">{{ userName }}さんのマイページです</div>
+    <div v-if="!showFavPlans">
+      <div class="Mypage">My page</div>
+      <div class="photo-container">
+        <div class="user-photo">
+          <v-avatar class="mr-2" color="#E0E0E0" size="50">
+            <img v-if="userName !== 'ゲスト'" :src="profileImage" />
+            <v-icon v-else dark large>mdi-account</v-icon>
+          </v-avatar>
+          <div class="user-info">{{ userName }}さんのマイページです</div>
+        </div>
       </div>
-    </div>
-    <div class="circle-container">
-      <div class="center">
-        <router-link to="/" style="text-decoration: none;">
+      <div class="circle-container">
+        <div class="center">
           <div class="circle-menu">
             <i class="fas fa-crown"></i>
             <span>Profile</span>
           </div>
-        </router-link>
-      </div>
-      <div class="circle">
-        <router-link to="/plan-list" style="text-decoration: none;">
-          <div class="circle-menu">
-            <i class="fas fa-search"></i>
+        </div>
+        <div class="circle">
+          <div class="circle-menu" @click="showFavPlans = !showFavPlans">
+            <i class="fas fa-heart"></i>
             <span>Favorite</span>
           </div>
-        </router-link>
-        <router-link to="/" style="text-decoration: none;">
           <div class="circle-menu">
-            <i class="fas fa-heart"></i>
+            <i class="fas fa-star"></i>
             <span>Created</span>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
+    <Favorite v-else @return="showFavPlans = !showFavPlans"></Favorite>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
+import Favorite from "@/components/MyPage/Favorite.vue";
 
 export default {
+  components: {
+    Favorite
+  },
   data() {
     return {
       userName: "",
-      profileImage: ""
+      profileImage: "",
+      showFavPlans: false
     };
   },
   created() {
