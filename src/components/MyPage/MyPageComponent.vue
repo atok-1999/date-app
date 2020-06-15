@@ -167,4 +167,7 @@ export default {
   text-align: center;
   margin: 15px 0;
 }
+.circle-container {
+  margin-bottom: 60%;
+}
 </style>

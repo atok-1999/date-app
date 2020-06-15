@@ -11,7 +11,12 @@
           <div class="spots">
             <div class="add-plan">
               <div class="photo-spot">
-                <img :src="spot.spotPhoto" height="48" width="48" @click="detailSpot(index)" />
+                <img
+                  :src="spot.spotPhoto"
+                  height="48"
+                  width="48"
+                  @click="detailSpot(index)"
+                />
               </div>
             </div>
             <div class="time-schedule">
@@ -19,7 +24,9 @@
                 <p class="am-pm">{{ spot.items1 }}</p>
               </div>
               <div class="time-d">
-                <div class="time-minutes">{{ spot.hours1 }}:{{ spot.minutes1 }}</div>
+                <div class="time-minutes">
+                  {{ spot.hours1 }}:{{ spot.minutes1 }}
+                </div>
               </div>
               <div class="contents">
                 <div>
@@ -38,12 +45,15 @@
       <div class="user-info">
         デートプランの作成者：
         {{
-        $store.state.userNamePostedPlan
-        ? $store.state.userNamePostedPlan + " さん"
-        : "ゲストさん"
+          $store.state.userNamePostedPlan
+            ? $store.state.userNamePostedPlan + " さん"
+            : "ゲストさん"
         }}
         <v-avatar class="ml-2" color="#E0E0E0" size="50">
-          <img v-if="$store.state.userPhotoPostedPlan" :src="$store.state.userPhotoPostedPlan" />
+          <img
+            v-if="$store.state.userPhotoPostedPlan"
+            :src="$store.state.userPhotoPostedPlan"
+          />
           <v-icon v-else dark>mdi-account</v-icon>
         </v-avatar>
       </div>
