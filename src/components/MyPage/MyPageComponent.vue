@@ -19,13 +19,19 @@
           </div>
         </div>
         <div class="circle">
-          <div class="circle-menu" @click="showFavPlans = !showFavPlans">
-            <i class="fas fa-heart"></i>
-            <span>Favorite</span>
+          <div class="circle-container1">
+            <div class="circle-menu" @click="showFavPlans = !showFavPlans">
+              <i class="fas fa-heart"></i>
+              <span>Favorite</span>
+            </div>
           </div>
-          <div class="circle-menu">
-            <i class="fas fa-star"></i>
-            <span>Created</span>
+          <div class="circle-container2">
+            <router-link to="/create-plan" style="text-decoration: none;">
+              <div class="circle-menu">
+                <i class="fas fa-star"></i>
+                <span>Created</span>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -99,8 +105,37 @@ export default {
   font-size: 13px;
 }
 
+.circle-container1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3%;
+}
+
+.circle-container2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3%;
+}
+
+.circle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2%;
+  margin-bottom: 33%;
+}
+
 .center {
-  margin-left: 132px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15%;
 }
 
 .circle-menu {
@@ -112,24 +147,14 @@ export default {
   height: 84px;
   border-radius: 50%;
   background-color: #d9b2ca;
-  margin: 5px 10px;
   color: #ffffff;
   font-size: 12px;
-  text-align: center;
   .fas {
     font-size: 20px;
     margin-bottom: 5px;
   }
 }
-.circle {
-  display: flex;
-  margin-left: 82px;
-}
 
-.circle-container {
-  margin-top: 50px;
-  margin-bottom: 174px;
-}
 .options {
   margin-top: 10px;
 }
