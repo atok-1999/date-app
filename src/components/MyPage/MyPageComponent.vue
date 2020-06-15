@@ -26,12 +26,10 @@
             </div>
           </div>
           <div class="circle-container2">
-            <router-link to="/create-plan" style="text-decoration: none;">
-              <div class="circle-menu">
-                <i class="fas fa-star"></i>
-                <span>Created</span>
-              </div>
-            </router-link>
+            <div class="circle-menu">
+              <i class="fas fa-star"></i>
+              <span>Created</span>
+            </div>
           </div>
         </div>
       </div>
