@@ -119,5 +119,7 @@ export default {};
     margin-bottom: 5px;
   }
 }
-
+.circle-container {
+  margin-bottom: 35%;
+}
 </style>
