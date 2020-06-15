@@ -16,18 +16,22 @@
         </router-link>
       </div>
       <div class="circle">
-        <router-link to="/plan-list" style="text-decoration: none;">
-          <div class="circle-menu">
-            <i class="fas fa-search"></i>
-            <span>Search</span>
-          </div>
-        </router-link>
-        <router-link to="/my-page" style="text-decoration: none;">
-          <div class="circle-menu">
-            <i class="fas fa-heart"></i>
-            <span>My Page</span>
-          </div>
-        </router-link>
+        <div class="circle-container1">
+          <router-link to="/plan-list" style="text-decoration: none;">
+            <div class="circle-menu">
+              <i class="fas fa-search"></i>
+              <span>Search</span>
+            </div>
+          </router-link>
+        </div>
+        <div class="circle-container2">
+          <router-link to="/my-page" style="text-decoration: none;">
+            <div class="circle-menu">
+              <i class="fas fa-heart"></i>
+              <span>My Page</span>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -38,10 +42,6 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.content {
-  min-height: 100vh;
-}
-
 .image {
   display: block;
   width: 100%;
@@ -69,8 +69,37 @@ export default {};
   font-size: 12px;
 }
 
+.circle-container1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3%;
+}
+
+.circle-container2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3%;
+}
+
+.circle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2%;
+  margin-bottom: 8%;
+}
+
 .center {
-  margin-left: 132px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
 }
 
 .circle-menu {
@@ -82,7 +111,6 @@ export default {};
   height: 84px;
   border-radius: 50%;
   background-color: #d9b2ca;
-  margin: 5px 10px;
   color: #ffffff;
   font-size: 12px;
   text-align: center;
@@ -91,12 +119,5 @@ export default {};
     margin-bottom: 5px;
   }
 }
-.circle {
-  display: flex;
-  margin-left: 82px;
-}
 
-.circle-container {
-  margin-top: 25px;
-}
 </style>
